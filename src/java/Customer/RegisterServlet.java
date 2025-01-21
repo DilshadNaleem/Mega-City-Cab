@@ -6,13 +6,15 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import jakarta.servlet.ServletException;  // Jakarta servlet imports
-import jakarta.servlet.http.HttpServlet;  // Jakarta servlet imports
-import jakarta.servlet.http.HttpServletRequest;  // Jakarta servlet imports
-import jakarta.servlet.http.HttpServletResponse;  // Jakarta servlet imports
+import jakarta.servlet.ServletException;  
+import jakarta.servlet.http.HttpServlet;  
+import jakarta.servlet.http.HttpServletRequest;  
+import jakarta.servlet.http.HttpServletResponse;  
+import jakarta.servlet.http.HttpSession;  
 import java.util.Random;
-import jakarta.mail.*;  // Jakarta mail imports
-import jakarta.mail.internet.*;  // Jakarta mail imports
+import jakarta.mail.*;  
+import jakarta.mail.internet.*;  
+import java.security.MessageDigest;
 import java.util.Properties;
 
 public class RegisterServlet extends HttpServlet {
@@ -45,6 +47,9 @@ public class RegisterServlet extends HttpServlet {
         // Generate an OTP for email verification
         String otp = generateOTP();
 
+        // Create customer object
+        Customer customer = new Customer(uniqueId, firstname, lastname, email, contactNumber, password, otp);
+
         // Database connection and insert logic
         try {
             // Load MySQL JDBC driver
@@ -53,26 +58,50 @@ public class RegisterServlet extends HttpServlet {
             // Establish database connection
             Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 
-            // SQL query to insert data into the 'customers' table
-            String sql = "INSERT INTO customers (unique_id, first_name, last_name, email, contact_number, password, status, created_at) VALUES (?, ?, ?, ?, ?, ?, 0, NOW())";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, uniqueId);
-            stmt.setString(2, firstname);
-            stmt.setString(3, lastname);
-            stmt.setString(4, email);
-            stmt.setString(5, contactNumber);
-            stmt.setString(6, password);
-
-            // Execute the insert query
-            int rowsInserted = stmt.executeUpdate();
-            if (rowsInserted > 0) {
-                out.println("<h1>Registration Successful! OTP Sent to your email.</h1>");
-                sendOTPEmail(email, otp, out);  // Send OTP email to the user
-                out.println("<a href='verifyOtp.html'>Go to OTP Verification</a>");
+            String checkEmailquery = "SELECT email FROM customers WHERE email = ? ";
+            PreparedStatement checkStmt = conn.prepareStatement(checkEmailquery);
+            checkStmt.setString(1, email);
+            ResultSet rs = checkStmt.executeQuery();
+            
+            if (rs.next()) {
+                out.println("<script type='text/javascript'>");
+                out.println("alert('Email already registered. Please use a different email.');");
+                out.println("window.location.href = '/Mega_City/Customer/Signin.html';");  // Redirect to registration page
+                out.println("</script>");
             } else {
-                out.println("<h1>Registration Failed. Please try again.</h1>");
-            }
+                // SQL query to insert data into the 'customers' table
+                String sql = "INSERT INTO customers (unique_id, first_name, last_name, email, contact_number, password, status, created_at) VALUES (?, ?, ?, ?, ?, ?, 0, NOW())";
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setString(1, customer.getUniqueId());
+                stmt.setString(2, customer.getFirstName());
+                stmt.setString(3, customer.getLastName());
+                stmt.setString(4, customer.getEmail());
+                stmt.setString(5, customer.getContactNumber());
+                stmt.setString(6, hashPassword(customer.getPassword()));  // Hash the password before storing
 
+                // Execute the insert query
+                int rowsInserted = stmt.executeUpdate();
+                if (rowsInserted > 0) {
+                    // Create session and store email and OTP (without saving to DB)
+                    HttpSession session = request.getSession();
+                    session.setAttribute("email", customer.getEmail());  // Store email in session
+                    session.setAttribute("otp", customer.getOtp());      // Store OTP in session
+
+                    // Send OTP email to the user
+                    sendOTPEmail(customer.getEmail(), customer.getOtp(), out);  
+
+                    // Redirect to the OTP verification page
+                    out.println("<script type='text/javascript'>");
+                    out.println("alert('Registration Successful! OTP has been sent to your email.');");
+                    out.println("window.location.href = './Customer/verification.html';");  // Redirect to verification.html
+                    out.println("</script>");
+                } else {
+                    out.println("<script type='text/javascript'>");
+                    out.println("alert('Registration Failed. Please try again.');");
+                    out.println("window.location.href = '/Mega_City/Customer/Signin.html';");  // Redirect to registration page
+                    out.println("</script>");
+                }
+            }
             // Close the database connection
             conn.close();
         } catch (Exception e) {
@@ -109,10 +138,33 @@ public class RegisterServlet extends HttpServlet {
         return uniqueId;
     }
 
-    // Method to generate a 4-digit OTP
+    // Method to generate a 6-digit OTP
     private String generateOTP() {
         Random rand = new Random();
-        return String.format("%04d", rand.nextInt(10000));  // Generates a random 4-digit OTP
+        return String.format("%06d", rand.nextInt(1000000));  // Generates a random 6-digit OTP
+    }
+
+    // Method to hash the password using SHA-256
+    private String hashPassword(String password) {
+        try {
+            // Get the instance of SHA-256 algorithm
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = digest.digest(password.getBytes("UTF-8"));
+
+            // Convert byte array into hexadecimal format
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hashedBytes) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     // Method to send OTP via email
