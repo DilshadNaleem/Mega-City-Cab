@@ -1,15 +1,101 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyper Zone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="Home.css">
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <div class="auth-links">
+                <a class="auth-link dropdown-toggle">
+                    <span class="account-icon"><i class="fas fa-user"> My Account</i></span>
+                    <div class="dropdown-content">
+                        <a href="../../../Customer/Customer_profile.php">My Profile</a>
+                        <a href="../../../Customer/Customer_Orders.php">My Orders</a>
+                        <a href="../../../Customer/Customer_Offfers.php">Offers</a>
+                        <a href="../../../Customer/Manage_Address.php">Manage Address</a>
+                        <a href="../../../Customer/FAQ.php">FAQs</a>
+                        <a href="../../../Customer/Customer_Refund">Refund</a>
+                        <a href="../../../Customer/customer_signin.html">Logout</a>
+                    </div>
+                </a>
+                <a href="#" class="auth-link"><span>Daily Deals </span><i class="fas fa-tag"></i></a>
+                <a href="contact.php" class="auth-link"><span>Help & Contact </span><i class="fas fa-question-circle"></i></a>
+            </div>
+        </div>
+        <div class="logo-search">
+            <a href="#" class="logo">Hyper Zone</a>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for anything">
+                <select>
+                    <option value="all-categories">All Categories</option>
+                </select>
+                <button>Search</button>
+            </div>
+        </div>
+        <nav class="main-menu" id="navbar">
+            <ul>
+                <li><a href="about.php">About Us</a></li>
+                <li><a href="save_wishlist.php">Saved</a></li>
+            </ul>
+        </nav>
+        <div class="menu-icon" onclick="toggleSidebar()">☰</div>
+        <div class="sidebar" id="sidebar">
+            <nav>
+                <ul>
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">×</a>
+                    <li><a href="about.php">About Us</a></li>
+                    <li><a href="#">Saved</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide active">
+                <img src="#" alt="Slide">
+                <div class="slide-content">
+                    <h2>Title</h2>
+                    <h3>Subtitle</h3>
+                    <p>Description</p>
+                    <a href="#" class="shop-btn">Shop Now</a>
+                </div>
+            </div>
+        </div>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+    </div>
+    <div class="chat-container" id="chat-container">
+        <div class="chat-header">
+            <h3><i class="fas fa-comments"></i> Chat with Us</h3>
+            <button id="close-chat"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chat-body" id="chat-body">
+            <div class="message bot-message">
+                Hello! How can I help you today?
+            </div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chat-input" placeholder="Type a message...">
+            <button id="send-btn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+    <center>
+        <div class="category-section">
+            <h2>Explore Popular Categories</h2><br><br>
+            <div class="categories">
+                <a href="#" class="category-item">
+                    <img src="#" alt="Category">
+                    <p>Category Name</p>
+                </a>
+            </div>
+        </div>
+    </center>
+    <button id="open-chat"><i class="fas fa-comment-dots"></i> Chat with Us</button>
+    <script src="Home1.js"></script>
+</body>
 </html>
