@@ -1,85 +1,85 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package Admin;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.sql.*;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import jakarta.mail.*;
+import jakarta.mail.internet.*;
+import java.util.Properties;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
-/**
- *
- * @author HP
- */
+
 public class AdminForgotPasswordServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AdminForgotPasswordServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AdminForgotPasswordServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
+   private Connection conn;
+   
+   public void init() throws ServletException 
+   {
+       try {
+           conn = DatabaseConnection.getConnection();
+       }
+       catch (Exception e)
+       {
+           e.printStackTrace();
+           throw new ServletException("Database connection error ", e);
+       }
+   }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        response.setContentType("text/html;charset=UTF-8");
+        String email = request.getParameter("email");
+        
+        HttpSession session = request.getSession();
+        session.setAttribute("adminemail", email);
+        
+        try (PrintWriter out = response.getWriter())
+        {
+            String query = "SELECT * FROM admin WHERE email = ?";
+            
+            try (PreparedStatement stmt = conn.prepareStatement(query))
+            {
+                stmt.setString(1, email);
+                ResultSet rs = stmt.executeQuery();
+                
+                if(rs.next())
+                {
+                    ForgotPasswordEmail emailService = new ForgotPasswordEmail();
+                    try {
+                        emailService.sendResetPasswordEmail(email);
+                        response.sendRedirect("/Mega_City/Admin/Reset_Password.html");
+                    } catch (Exception e)
+                    {
+                        e.printStackTrace();
+                        out.println("<h2> Error sending email: " + e.getMessage() + "</h2>");
+                    }
+                } else
+                {
+                    out.println("<h2> Email not found </h2>");
+                }
+            }
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            response.getWriter().println("<h2> Database Error: " + e.getMessage() + "</h2>");
+        }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+    
+   public void destroy()
+   {
+       try 
+       {
+           if(conn != null && !conn.isClosed())
+           {
+               conn.close();
+           }
+       } catch (SQLException e)
+       {
+           e.printStackTrace();
+       }
+        }
 }

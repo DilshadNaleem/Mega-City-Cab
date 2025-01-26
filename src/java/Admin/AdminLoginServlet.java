@@ -10,6 +10,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class AdminLoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -27,12 +29,16 @@ public class AdminLoginServlet extends HttpServlet {
         System.out.println("Password: " + password);  // This will print the password value to the console
 
         try {
+            // Hash the provided password
+            String hashedPassword = hashPassword(password);
+
             Connection conn = DatabaseConnection.getConnection();
 
+            // SQL query to check if the email and hashed password match
             String sql = "SELECT * FROM admin WHERE email = ? AND password = ? AND status = 1";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, email);
-            stmt.setString(2, password);  // Direct comparison without hashing
+            stmt.setString(2, hashedPassword);  // Use the hashed password for comparison
 
             ResultSet rs = stmt.executeQuery();
 
@@ -44,12 +50,12 @@ public class AdminLoginServlet extends HttpServlet {
                 // Redirect to dashboard on success
                 out.println("<script type='text/javascript'>");
                 out.println("alert('Login successful!');");
-                out.println("window.location.href = 'AdminDashboard.html';");  // Update with actual URL
+                out.println("window.location.href = '/Mega_City/Admin/Admin_Dashboard.html';");  // Update with actual URL
                 out.println("</script>");
             } else {
-                // Print the email and password in the alert for debugging purposes
+                // Invalid credentials
                 out.println("<script type='text/javascript'>");
-                out.println("alert('Invalid email or password. ');");
+                out.println("alert('Invalid email or password.');");
                 out.println("window.location.href = 'login.html';");
                 out.println("</script>");
             }
@@ -59,6 +65,22 @@ public class AdminLoginServlet extends HttpServlet {
             ex.printStackTrace();
             out.println("<h1>Error: Unable to process the request.</h1>");
             out.println("<p>" + ex.getMessage() + "</p>");
+        }
+    }
+
+    // Method to hash the password using SHA-256
+    private String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = md.digest(password.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashedBytes) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

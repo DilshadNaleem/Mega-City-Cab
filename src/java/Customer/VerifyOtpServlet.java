@@ -3,8 +3,6 @@ package Customer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,60 +21,44 @@ public class VerifyOtpServlet extends HttpServlet {
         String email = (String) session.getAttribute("email");
         String storedOtp = (String) session.getAttribute("otp");
 
-        if (storedOtp != null && otpEntered != null && otpEntered.equals(storedOtp)) {
-            Connection conn = null;
-            try {
-                conn = DatabaseConnection.getConnection();
-
-                String query = "SELECT status FROM customers WHERE email = ?";
-                PreparedStatement stmt = conn.prepareStatement(query);
-                stmt.setString(1, email);
-                ResultSet rs = stmt.executeQuery();
-
-                if (rs.next()) {
-                    int status = rs.getInt("status");
-
-                    if (status == 1) {
-                        out.println("<script type='text/javascript'>");
-                        out.println("alert('Account already verified.');");
-                        out.println("window.location.href = 'login.html';");
-                        out.println("</script>");
-                    } else {
-                        String updateQuery = "UPDATE customers SET status = 1 WHERE email = ?";
-                        PreparedStatement updateStmt = conn.prepareStatement(updateQuery);
-                        updateStmt.setString(1, email);
-                        int rowsUpdated = updateStmt.executeUpdate();
-
-                        if (rowsUpdated > 0) {
-                            out.println("<script type='text/javascript'>");
-                            out.println("alert('Account verified successfully!');");
-                            out.println("window.location.href = '/Mega_City/Customer/Signin.html';");
-                            out.println("</script>");
-                        } else {
-                            out.println("<script type='text/javascript'>");
-                            out.println("alert('Verification failed. Please try again.');");
-                            out.println("window.location.href = '/Mega_City/Customer/verification.html';");
-                            out.println("</script>");
-                        }
-                    }
-                } else {
-                    out.println("<script type='text/javascript'>");
-                    out.println("alert('Account not found. Please register first.');");
-                    out.println("window.location.href = 'registration.html';");
-                    out.println("</script>");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                out.println("<h1>Error: Unable to process the request.</h1>");
-                out.println("<p>" + e.getMessage() + "</p>");
-            } finally {
-                DatabaseConnection.closeConnection(conn);
-            }
-        } else {
-            out.println("<script type='text/javascript'>");
-            out.println("alert('Invalid OTP. Please try again.');");
-            out.println("window.location.href = '/Mega_City/Customer/verification.html';");
-            out.println("</script>");
+        if (storedOtp == null || otpEntered == null || !otpEntered.equals(storedOtp)) {
+            displayAlert(out, "Invalid OTP. Please try again.", "/Mega_City/Customer/verification.html");
+            return;
         }
+
+        Connection conn = null;
+        try {
+            conn = DatabaseConnection.getConnection();
+
+            if (!CustomerHelper.isEmailRegistered(conn, email)) {
+                displayAlert(out, "Account not found. Please register first.", "registration.html");
+                return;
+            }
+
+            if (CustomerHelper.isAccountVerified(conn, email)) {
+                displayAlert(out, "Account already verified.", "login.html");
+                return;
+            }
+
+            if (CustomerHelper.updateAccountStatus(conn, email)) {
+                displayAlert(out, "Account verified successfully!", "/Mega_City/Customer/Signin.html");
+            } else {
+                displayAlert(out, "Verification failed. Please try again.", "/Mega_City/Customer/verification.html");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            out.println("<h1>Error: Unable to process the request.</h1>");
+            out.println("<p>" + e.getMessage() + "</p>");
+        } finally {
+            DatabaseConnection.closeConnection(conn);
+        }
+    }
+
+    private void displayAlert(PrintWriter out, String message, String redirectUrl) {
+        out.println("<script type='text/javascript'>");
+        out.println("alert('" + message + "');");
+        out.println("window.location.href = '" + redirectUrl + "';");
+        out.println("</script>");
     }
 }

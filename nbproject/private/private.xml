@@ -3,19 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/HP/Documents/NetBeansProjects/Mega_City/web/Customer/Reset_Password.css</file>
-            <file>file:/C:/Users/HP/Documents/NetBeansProjects/Mega_City/src/java/Customer/LoginServlet.java</file>
-            <file>file:/C:/Users/HP/Documents/NetBeansProjects/Mega_City/web/Customer/Reset_Password.html</file>
-            <file>file:/C:/Users/HP/Documents/NetBeansProjects/Mega_City/src/java/Customer/RegisterServlet.java</file>
-            <file>file:/C:/Users/HP/Documents/NetBeansProjects/Mega_City/src/java/Customer/Customer.java</file>
-            <file>file:/C:/Users/HP/Documents/NetBeansProjects/Mega_City/web/Customer/Signin.html</file>
-            <file>file:/C:/Users/HP/Documents/NetBeansProjects/Mega_City/src/java/Customer/ResetPasswordServlet.java</file>
-            <file>file:/C:/Users/HP/Documents/NetBeansProjects/Mega_City/web/Admin/Admin_Register.html</file>
-            <file>file:/C:/Users/HP/Documents/NetBeansProjects/Mega_City/web/Customer/recover_psw.html</file>
-            <file>file:/C:/Users/HP/Documents/NetBeansProjects/Mega_City/src/java/Customer/DatabaseConnection.java</file>
-            <file>file:/C:/Users/HP/Documents/NetBeansProjects/Mega_City/src/java/Customer/ForgotPasswordServlet.java</file>
-            <file>file:/C:/Users/HP/Documents/NetBeansProjects/Mega_City/web/Admin/Admin_Login.html</file>
-            <file>file:/C:/Users/HP/Documents/NetBeansProjects/Mega_City/src/java/Customer/SendOTPEmail.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/Mega_City/src/java/Admin/AdminResetPasswordServet.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/Mega_City/src/java/Customer/ResetPasswordServe.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/Mega_City/src/java/Customer/VerifyOtpServlet.java</file>
+            <file>file:/C:/Users/HP/Documents/NetBeansProjects/Mega_City/src/java/Admin/AdminLoginServlet.java</file>
         </group>
     </open-files>
 </project-private>

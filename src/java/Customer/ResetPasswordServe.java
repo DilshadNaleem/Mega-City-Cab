@@ -1,31 +1,22 @@
 package Customer;
 
-import java.sql.*;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import java.io.*;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.sql.*;
 
 public class ResetPasswordServe extends HttpServlet {
-
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/mega_city";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "";
 
     private Connection conn;
 
     @Override
     public void init() throws ServletException {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+            // Get connection from DatabaseConnection
+            conn = DatabaseConnection.getConnection();
         } catch (SQLException e) {
             e.printStackTrace();
             throw new ServletException("Database connection error", e);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new ServletException("JDBC Driver not found", e);
         }
     }
 
@@ -43,7 +34,7 @@ public class ResetPasswordServe extends HttpServlet {
                 return;
             }
 
-            // Print session email to console for debugging
+            // Debugging log
             System.out.println("Session email: " + sessionEmail);
 
             String newPassword = request.getParameter("newPassword");
@@ -55,16 +46,22 @@ public class ResetPasswordServe extends HttpServlet {
             }
 
             if (newPassword.equals(confirmPassword)) {
-                String hashedPassword = hashPassword(newPassword);
-                String updateQuery = "UPDATE customers SET password = ? WHERE email = ?";
+                // Use PasswordHasher to hash the password
+                PasswordHasher hasher = new PasswordHasher();
+                String hashedPassword = hasher.hashPassword(newPassword);
 
+                String updateQuery = "UPDATE customers SET password = ? WHERE email = ?";
                 try (PreparedStatement updateStmt = conn.prepareStatement(updateQuery)) {
                     updateStmt.setString(1, hashedPassword);
                     updateStmt.setString(2, sessionEmail);
+
                     int rowsAffected = updateStmt.executeUpdate();
 
                     if (rowsAffected > 0) {
-                        out.println("<h2>Password updated successfully.</h2>");
+                         out.println("<script type='text/javascript'>");
+                         out.println("alert('Update successful!');");
+                         out.println("window.location.href = '/Mega_City/Customer/Signin.html';"); // Adjust to actual dashboard URL
+                         out.println("</script>");
                     } else {
                         out.println("<h2>Error: Failed to update the password. Please try again later.</h2>");
                     }
@@ -78,20 +75,6 @@ public class ResetPasswordServe extends HttpServlet {
         } catch (IOException e) {
             e.printStackTrace();
             response.getWriter().println("<h2>Error: Unexpected error occurred. Please try again later.</h2>");
-        }
-    }
-
-    private String hashPassword(String password) throws IOException {
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hashedBytes = md.digest(password.getBytes());
-            StringBuilder sb = new StringBuilder();
-            for (byte b : hashedBytes) {
-                sb.append(String.format("%02x", b));
-            }
-            return sb.toString();
-        } catch (NoSuchAlgorithmException e) {
-            throw new IOException("Password hashing algorithm not available", e);
         }
     }
 

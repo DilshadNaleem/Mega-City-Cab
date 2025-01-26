@@ -131,40 +131,37 @@ private static final long serialVersionUID = 1L;
         return String.format("%06d", rand.nextInt(1000000));
     }
     
-    private void sendOTPEmail (String toEmail, String otp, PrintWriter out)
-    {
-        try 
-        {
-            Properties pro = new Properties();
-            pro.put("mail.smtp.host", "smtp.gmail.com");
-            pro.put("mail.smtp.port", "587");
-            pro.put("mail.smtp.auth", "true");
-            pro.put("mail.smtp.starttls.enable","true");
-            
-            Session session = Session.getInstance(pro, new jakarta.mail.Authenticator()
-                    {
-                        protected PasswordAuthentication getPasswordauthentication ()
-                        {
-                            return new PasswordAuthentication (FROM_EMAIL, EMAIL_PASSWORD);
-                        }
-                    });
-            
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("Mega City Cab"));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
-            message.setSubject("Your OTP for Registration");
-            message.setText("Your OTP is: " + otp);
-            
-            Transport.send(message);
-            System.out.println("OTP Sent Successfully");
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-            out.println("<h1>Error sending OTP email</h1>");
-            out.println("<p>" + ex.getMessage() + "</p>");
-        }
+   private void sendOTPEmail(String toEmail, String otp, PrintWriter out) {
+    try {
+        Properties pro = new Properties();
+        pro.put("mail.smtp.host", "smtp.gmail.com");
+        pro.put("mail.smtp.port", "587");
+        pro.put("mail.smtp.auth", "true");
+        pro.put("mail.smtp.starttls.enable", "true");
+        pro.put("mail.debug", "true"); // Enable detailed debug output
+        
+        Session session = Session.getInstance(pro, new jakarta.mail.Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(FROM_EMAIL, EMAIL_PASSWORD);
+            }
+        });
+
+        Message message = new MimeMessage(session);
+        message.setFrom(new InternetAddress(FROM_EMAIL, "Mega City Cab"));
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+        message.setSubject("Your OTP for Registration");
+        message.setText("Your OTP is: " + otp);
+
+        Transport.send(message);
+        System.out.println("OTP Sent Successfully to " + toEmail);
+    } catch (Exception ex) {
+        ex.printStackTrace();
+        out.println("<h1>Error sending OTP email</h1>");
+        out.println("<p>" + ex.getMessage() + "</p>");
     }
+}
+
     
      private String hashPassword(String password) {
         try {

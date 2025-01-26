@@ -26,7 +26,7 @@ public class AdminVerifyOtpServlet extends HttpServlet {
      
      String otpEntered = request.getParameter("otp_code");
      HttpSession session = request.getSession();
-     String email = (String) session.getAttribute("email");
+     String email = (String) session.getAttribute("adminemail");
      String storedOtp = (String) session.getAttribute("otp");
      
      if(storedOtp != null && otpEntered != null && otpEntered.equals(storedOtp))

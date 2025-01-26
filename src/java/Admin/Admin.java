@@ -12,8 +12,7 @@ public class Admin {
     private String password;
     private String otp;
     
-    public Admin (String uniqueId, String firstName, String lastName, String email, String nic,
-            String contactnumber, String password, String otp)
+    public Admin (String uniqueId, String firstName, String lastName, String email,String contactnumber,  String nic ,String password, String otp)
     {
         this.uniqueId = uniqueId;
         this.firstName = firstName;
@@ -23,6 +22,7 @@ public class Admin {
         this.contactNumber = contactnumber;
         this.password = password;
         this.otp = otp;
+        
         
     }
 
