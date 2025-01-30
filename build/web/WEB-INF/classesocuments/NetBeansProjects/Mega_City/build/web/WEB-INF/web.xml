@@ -68,6 +68,42 @@
         <servlet-name>DriverLoginServlet</servlet-name>
         <servlet-class>Driver.DriverLoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MultiPartServlet</servlet-name>
+        <servlet-class>com.example.MultiPartServlet</servlet-class>
+        <init-param>
+            <param-name>maxFileSize</param-name>
+            <param-value>20485760</param-value>
+        </init-param>
+        <init-param>
+            <param-name>maxRequestSize</param-name>
+            <param-value>40971520</param-value>
+        </init-param>
+        <init-param>
+            <param-name>fileSizeThreshold</param-name>
+            <param-value>1024</param-value>
+        </init-param>
+    </servlet>
+    <servlet>
+        <servlet-name>VehicleSaveServlet</servlet-name>
+        <servlet-class>Driver.VehicleSaveServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VehicleRetrieveServlet</servlet-name>
+        <servlet-class>Driver.VehicleRetrieveServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HelloServlet</servlet-name>
+        <servlet-class>HelloServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DashboardServlet</servlet-name>
+        <servlet-class>Customer.DashboardServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddVehicleServlet</servlet-name>
+        <servlet-class>Admin.AddVehicleServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
@@ -136,8 +172,27 @@
         <servlet-name>DriverLoginServlet</servlet-name>
         <url-pattern>/DriverLoginServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VehicleSaveServlet</servlet-name>
+        <url-pattern>/VehicleSaveServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VehicleRetrieveServlet</servlet-name>
+        <url-pattern>/VehicleRetrieveServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HelloServlet</servlet-name>
+        <url-pattern>/HelloServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DashboardServlet</servlet-name>
+        <url-pattern>/DashboardServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddVehicleServlet</servlet-name>
+        <url-pattern>/AddVehicleServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
-        <!-- Timeout after 30 minutes -->
     </session-config>
 </web-app>

@@ -30,7 +30,7 @@ public class DatabaseUtility {
     }
 
     public boolean insertCustomer(Customer customer) throws SQLException {
-        String query = "INSERT INTO customers (unique_id, first_name, last_name, email, contact_number, password, status, created_at) VALUES (?, ?, ?, ?, ?, ?, 0, NOW())";
+        String query = "INSERT INTO customers (unique_id, first_name, last_name, email, contact_number, password, status, created_at,nic,image) VALUES (?, ?, ?, ?, ?, ?, 0, NOW(),?,'account.png')";
         try (Connection conn = connect();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, customer.getUniqueId());
@@ -39,6 +39,7 @@ public class DatabaseUtility {
             stmt.setString(4, customer.getEmail());
             stmt.setString(5, customer.getContactNumber());
             stmt.setString(6, customer.getPassword());
+            stmt.setString(7,customer.getNic());
             return stmt.executeUpdate() > 0;
         }
     }

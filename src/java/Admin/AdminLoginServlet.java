@@ -50,7 +50,7 @@ public class AdminLoginServlet extends HttpServlet {
                 // Redirect to dashboard on success
                 out.println("<script type='text/javascript'>");
                 out.println("alert('Login successful!');");
-                out.println("window.location.href = '/Mega_City/Admin/Admin_Dashboard.html';");  // Update with actual URL
+                out.println("window.location.href = '/Mega_City/Admin/Admin_Dashboard.jsp';");  // Update with actual URL
                 out.println("</script>");
             } else {
                 // Invalid credentials

@@ -16,7 +16,8 @@ public class RegisterServlet extends HttpServlet {
         String email = request.getParameter("email");
         String contactNumber = request.getParameter("contact_number");
         String password = request.getParameter("password");
-
+        String nic = request.getParameter("nic");
+        
         DatabaseUtility dbUtility = new DatabaseUtility();
         UniqueIdGenerator idGenerator = new UniqueIdGenerator();
         OtpGenerator otpGenerator = new OtpGenerator();
@@ -31,7 +32,7 @@ public class RegisterServlet extends HttpServlet {
                 String otp = otpGenerator.generateOTP();
                 String hashedPassword = hasher.hashPassword(password);
 
-                Customer customer = new Customer(uniqueId, firstname, lastname, email, contactNumber, hashedPassword, otp);
+                Customer customer = new Customer(uniqueId, firstname, lastname, email, contactNumber, hashedPassword, otp,nic);
                 if (dbUtility.insertCustomer(customer)) {
                     HttpSession session = request.getSession();
                     session.setAttribute("email", customer.getEmail());

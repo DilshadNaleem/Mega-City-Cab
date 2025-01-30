@@ -10,9 +10,11 @@ public class Customer {
     private String contactNumber;
     private String password;
     private String otp;
+    private String nic;
+    
 
     // Constructor to initialize a customer object
-    public Customer(String uniqueId, String firstName, String lastName, String email, String contactNumber, String password, String otp) {
+    public Customer(String uniqueId, String firstName, String lastName, String email, String contactNumber, String password, String otp,String nic) {
         this.uniqueId = uniqueId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -20,6 +22,15 @@ public class Customer {
         this.contactNumber = contactNumber;
         this.password = password;
         this.otp = otp;
+        this.nic = nic;
+    }
+
+    public String getNic() {
+        return nic;
+    }
+
+    public void setNic(String nic) {
+        this.nic = nic;
     }
 
     // Getters and setters for each field

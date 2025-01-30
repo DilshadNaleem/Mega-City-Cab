@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
                 // Redirect to the customer dashboard
                 out.println("<script type='text/javascript'>");
                 out.println("alert('Login successful!');");
-                out.println("window.location.href = './Customer/Dashboard.html';"); // Adjust to actual dashboard URL
+                out.println("window.location.href = '/Mega_City/DashboardServlet';"); // Adjust to actual dashboard URL
                 out.println("</script>");
             } else {
                 // Login failed
