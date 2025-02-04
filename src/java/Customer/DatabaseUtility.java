@@ -30,7 +30,7 @@ public class DatabaseUtility {
     }
 
     public boolean insertCustomer(Customer customer) throws SQLException {
-        String query = "INSERT INTO customers (unique_id, first_name, last_name, email, contact_number, password, status, created_at,nic,image) VALUES (?, ?, ?, ?, ?, ?, 0, NOW(),?,'account.png')";
+        String query = "INSERT INTO customers (unique_id, first_name, last_name, email, contact_number, password, status, created_at,nic,image,customer_type) VALUES (?, ?, ?, ?, ?, ?, 0, NOW(),?,'account.png','Regular')";
         try (Connection conn = connect();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, customer.getUniqueId());

@@ -11,6 +11,7 @@ public class Customer {
     private String password;
     private String otp;
     private String nic;
+   
     
 
     // Constructor to initialize a customer object

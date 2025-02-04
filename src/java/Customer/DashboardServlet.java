@@ -14,7 +14,7 @@ public class DashboardServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Set content type for the response (it will still be HTML in the JSP)
+        // Set content type for the response
         response.setContentType("text/html");
 
         // Start logging
@@ -31,43 +31,55 @@ public class DashboardServlet extends HttpServlet {
                 return;
             }
 
-            // SQL query to fetch vehicle data
-            String query = "SELECT vehicle_cat, vehicle_image FROM vehicle_types";
-            try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+            // SQL queries to fetch vehicle categories and images
+            String categoryQuery = "SELECT vehicle_cat FROM vehicle_types";
+            String imageQuery = "SELECT vehicle_image FROM vehicle_types";
 
-                // List to store vehicle data
-                List<Map<String, String>> vehicles = new ArrayList<>();
+            // Lists to store vehicle categories and images
+            List<String> categories = new ArrayList<>();
+            List<String> images = new ArrayList<>();
 
-                // Loop through the result set and add data to the list
-                while (rs.next()) {
-                    Map<String, String> vehicle = new HashMap<>();
-                    vehicle.put("vehicleName", rs.getString("vehicle_cat"));
-                    vehicle.put("imagePath", rs.getString("vehicle_image"));
-                    vehicles.add(vehicle);
+            // Fetch categories
+            try (Statement stmt = conn.createStatement(); ResultSet categoryRs = stmt.executeQuery(categoryQuery)) {
+                while (categoryRs.next()) {
+                    categories.add(categoryRs.getString("vehicle_cat"));
                 }
-
-                // Log number of vehicles fetched
-                logger.info("Fetched " + vehicles.size() + " vehicles from the database.");
-
-                // Set the vehicle data as a request attribute to pass it to the JSP
-                request.setAttribute("vehicles", vehicles);
-
-                // Forward to the JSP for rendering
-                request.getRequestDispatcher("/Customer/oldDashboard.jsp").forward(request, response);
-
-            } catch (SQLException e) {
-                // SQL exception handling
-                logger.severe("SQL Error: " + e.getMessage());
-                request.setAttribute("error", "Error fetching vehicle data: " + e.getMessage());
-                request.getRequestDispatcher("/error.jsp").forward(request, response);
+                logger.info("Fetched " + categories.size() + " categories from the database.");
             }
+
+            // Fetch images
+            try (Statement stmt = conn.createStatement(); ResultSet imageRs = stmt.executeQuery(imageQuery)) {
+                while (imageRs.next()) {
+                    images.add(imageRs.getString("vehicle_image"));
+                }
+                logger.info("Fetched " + images.size() + " images from the database.");
+            }
+
+            // Combine categories and images into a list of maps
+            List<Map<String, String>> vehicles = new ArrayList<>();
+            for (int i = 0; i < Math.min(categories.size(), images.size()); i++) {
+                Map<String, String> vehicle = new HashMap<>();
+                vehicle.put("vehicleName", categories.get(i));
+                vehicle.put("imagePath", images.get(i));
+                vehicles.add(vehicle);
+            }
+
+            // Log number of vehicles combined
+            logger.info("Combined " + vehicles.size() + " vehicles from the database.");
+
+            // Set the vehicle data as a request attribute to pass it to the JSP
+            request.setAttribute("vehicles", vehicles);
+
+            // Forward to the JSP for rendering
+            request.getRequestDispatcher("/Customer/oldDashboard.jsp").forward(request, response);
+
         } catch (SQLException e) {
-            // Handle database connection errors
-            logger.severe("Database connection error: " + e.getMessage());
-            request.setAttribute("error", "Error: Could not connect to the database.");
+            // Handle database errors
+            logger.severe("Database error: " + e.getMessage());
+            request.setAttribute("error", "Error: Could not fetch vehicle data.");
             request.getRequestDispatcher("/error.jsp").forward(request, response);
         } catch (Exception e) {
-            // General exception handling
+            // Handle general errors
             logger.severe("Unexpected error: " + e.getMessage());
             request.setAttribute("error", "An unexpected error occurred: " + e.getMessage());
             request.getRequestDispatcher("/error.jsp").forward(request, response);
