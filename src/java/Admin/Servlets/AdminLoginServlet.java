@@ -1,4 +1,4 @@
-package Admin;
+package Admin.Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import DatabaseConnection.*;
 
 public class AdminLoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;

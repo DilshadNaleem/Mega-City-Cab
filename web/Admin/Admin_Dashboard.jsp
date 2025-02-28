@@ -180,67 +180,42 @@
 
   <div class="sidebar">
     <ul>
-      <li><a href="admin_dashboard.php"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
+      <li><a href="/Mega_City/Admin/Admin_Dashboard.jsp"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
       <li><a href="#" class="submenu-toggle"><i class="glyphicon glyphicon-user"></i> User Management</a>
         <ul class="nav submenu">
-          <li><a href="">Manage Staff</a></li>
-          <li><a href="">Manage Customer</a></li>
-          <li><a href="">Manage Suppliers</a></li>
+          <li><a href="/Mega_City/ManageStaffServlet">Manage Staff</a></li>
+          <li><a href="/Mega_City/ManageCustomerServlet">Manage Customer</a></li>
+          
         </ul>
       </li>
-      <li><a href="Promotion/Category/ManageCategory.php"><i class="glyphicon glyphicon-indent-left"></i> Manage Categories</a>
+      <li><a href="/Mega_City/ManageVehicleTypesServlet"><i class="glyphicon glyphicon-indent-left"></i> Manage Categories</a>
       <ul class="nav submenu">
-        <li><a href="p">Manage Sub Categories</a></li>
+        <li><a href="/Mega_City/Admin/Add_Vehicle_Types.html">Add Categories</a></li>
       </ul>
       </li>
       <li><a href="#" class="submenu-toggle"><i class="glyphicon glyphicon-th-large"></i> Products</a>
         <ul class="nav submenu">
-          <li><a href="">Manage Products</a></li>
-          <li><a href="">Add Products</a></li>
+          <li><a href="/Mega_City/VehicleManageServlet">Manage Vehicles</a></li>
+         
         </ul>
-      </li>
-      <li><a href="#" class="submenu-toggle"><i class="glyphicon glyphicon-picture"></i> Promotion & Discounts</a>
-      <ul class="nav submenu">
-        <li><a href="">Manage Promotions</a></li>
-        <li><a href="">Manage Discounts</a></li>
-      </ul>
-    </li>
-      <li><a href="#" class="submenu-toggle"><i class="glyphicon glyphicon-credit-card"></i> Refunds</a>
-        <ul class="nav submenu">
-          <li><a href="">Pending Refunds</a></li>
-          <li><a href="">Refunds</a></li>
-          <li><a href="">Manage Refunds</a></li>
-        </ul>
-      </li>
+    
       <li>
-    <a href="#" class="submenu-toggle">
-        <i class="glyphicon glyphicon-list-alt"></i> Manage Customer Orders
+    <a href="/Mega_City/ManageTripServlet" class="submenu-toggle">
+        <i class="glyphicon glyphicon-list-alt"></i> View All Bookings
     </a>
-    <ul class="submenu">
-        <li>
-            <a href="View_Customer_Orders.php">Manage Orders</a>
-        </li>
-        <li><a href="">View Pending Orders</a></li>
-        <li><a href="">View Delivered Orders</a></li>
-    </ul>
+   
 </li>
 
-    <li><a href="#" class="submenu-toggle"><i class="glyphicon glyphicon-list-alt"></i> Manage Agent Orders</a>
+    <li><a href="#" class="submenu-toggle"><i class="glyphicon glyphicon-list-alt"></i> Requests</a>
     <ul class="submenu">
-      <li><a href="Manage_Agent_Orders_Admin.php">Manage Orders</a></li>
+      <li><a href="/Mega_City/RequestDriverServlet">Request for Driver</a></li>
      
     </ul>
     </li>
-      <li><a href="#" class="submenu-toggle"><i class="glyphicon glyphicon-duplicate"></i> Sales Report</a>
-        <ul class="nav submenu">
-          <li><a href="">Sales</a></li>
-          <li><a href="">Proft</a></li>
-         
-         
-        </ul>
-      </li>
-      <li><a href="View_Feedback.php" class="submenu-toggle"><i class="fas fa-comments"></i> View Feedbacks</a></li>
-      <li><a href="../../LiveChatWithVideo/" class="submenu-toggle"><i class="fas fa-headset"></i> Contact Staff</a></li>
+      
+     
+      <li><a href="/Mega_City/Admin/Admin_Login.html" class="submenu-toggle"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+
 
     </ul>
   </div>
@@ -251,24 +226,16 @@
     <a href="" class="card">
       <i class="glyphicon glyphicon-user"></i>  Users
     </a>
-    <a href="" class="card">
-      <i class="glyphicon glyphicon-th"></i>  Categories
+   
+    <a href="/Mega_City/Admin/Add_Vehicle_Types.html" class="card">
+      <i class="glyphicon glyphicon-shopping-cart"></i>  Manage Vehicle Types
     </a>
-    <a href="" class="card">
-      <i class="glyphicon glyphicon-shopping-cart"></i>  Products
+    <a href="/Mega_City/VehicleManageServlet" class="card">
+      <i class="glyphicon glyphicon-th"></i>  Manage Vehicles
     </a>
-    <a href="" class="card">
-      <i class="glyphicon glyphicon-th"></i>  Sub Categories
-    </a>
-    <a href="" class="card">
-      <i class="glyphicon glyphicon-usd"></i> Sales
-    </a>
+   
   </div>
 </div>
 
-
-
- 
- 
 </body>
 </html>

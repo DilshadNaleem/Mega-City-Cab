@@ -1,5 +1,6 @@
 package Admin;
 
+import Admin.Interface.EmailServiceInterface;
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
 import java.io.UnsupportedEncodingException;

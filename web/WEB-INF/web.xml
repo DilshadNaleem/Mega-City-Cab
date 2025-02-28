@@ -14,7 +14,7 @@
     </servlet>
     <servlet>
         <servlet-name>AdminRegisterServlet</servlet-name>
-        <servlet-class>Admin.AdminRegisterServlet</servlet-class>
+        <servlet-class>Admin.Servlets.AdminRegisterServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ResetPasswordServlet</servlet-name>
@@ -30,11 +30,11 @@
     </servlet>
     <servlet>
         <servlet-name>AdminLoginServlet</servlet-name>
-        <servlet-class>Admin.AdminLoginServlet</servlet-class>
+        <servlet-class>Admin.Servlets.AdminLoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminVerifyOtpServlet</servlet-name>
-        <servlet-class>Admin.AdminVerifyOtpServlet</servlet-class>
+        <servlet-class>Admin.Servlets.AdminVerifyOtpServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>VerifyOtpServlet</servlet-name>
@@ -42,11 +42,11 @@
     </servlet>
     <servlet>
         <servlet-name>AdminResetPasswordServet</servlet-name>
-        <servlet-class>Admin.AdminResetPasswordServet</servlet-class>
+        <servlet-class>Admin.Servlets.AdminResetPasswordServet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminForgotPasswordServlet</servlet-name>
-        <servlet-class>Admin.AdminForgotPasswordServlet</servlet-class>
+        <servlet-class>Admin.Servlets.AdminForgotPasswordServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DriverRegisterServlet</servlet-name>
@@ -93,16 +93,128 @@
         <servlet-class>Driver.VehicleRetrieveServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>HelloServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>DashboardServlet</servlet-name>
         <servlet-class>Customer.DashboardServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddVehicleServlet</servlet-name>
-        <servlet-class>Admin.AddVehicleServlet</servlet-class>
+        <servlet-class>Admin.Servlets.AddVehicleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductServlet</servlet-name>
+        <servlet-class>Customer.ProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>bookVehicleServlet</servlet-name>
+        <servlet-class>Customer.bookVehicleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HistoryServlet</servlet-name>
+        <servlet-class>Customer.HistoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CancelBookingServlet</servlet-name>
+        <servlet-class>Customer.CancelBookingServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookingsServlet</servlet-name>
+        <servlet-class>Driver.BookingsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CompleteTripServlet</servlet-name>
+        <servlet-class>Driver.CompleteTripServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DashboardCountServlet</servlet-name>
+        <servlet-class>Driver.DashboardCountServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookingServletView</servlet-name>
+        <servlet-class>Driver.BookingServletView</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TotalEarningsServlet</servlet-name>
+        <servlet-class>Driver.TotalEarningsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditProfileServlet</servlet-name>
+        <servlet-class>Driver.EditProfileServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateProfileServlet</servlet-name>
+        <servlet-class>Driver.UpdateProfileServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VehicleManageServlet</servlet-name>
+        <servlet-class>Admin.Servlets.VehicleManageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ApproveVehicleServlet</servlet-name>
+        <servlet-class>Admin.Servlets.ApproveVehicleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RejectVehicleServlet</servlet-name>
+        <servlet-class>Admin.Servlets.RejectVehicleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerEditProfileServlet</servlet-name>
+        <servlet-class>Customer.CustomerEditProfileServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerUpdateProfileServlet</servlet-name>
+        <servlet-class>Customer.CustomerUpdateProfileServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SliderSaveServlet</servlet-name>
+        <servlet-class>Admin.SliderSaveServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SampleServlet</servlet-name>
+        <servlet-class>Admin.SampleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageVehicleTypesServlet</servlet-name>
+        <servlet-class>Admin.Servlets.ManageVehicleTypesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditVehicleTypeServlet</servlet-name>
+        <servlet-class>Admin.Servlets.EditVehicleTypeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteVehicleTypeServlet</servlet-name>
+        <servlet-class>Admin.Servlets.DeleteVehicleTypeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageStaffServlet</servlet-name>
+        <servlet-class>Admin.Servlets.ManageStaffServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageCustomerServlet</servlet-name>
+        <servlet-class>Admin.Servlets.ManageCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteStaffServlet</servlet-name>
+        <servlet-class>Admin.Servlets.DeleteStaffServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCustomerServlet</servlet-name>
+        <servlet-class>Admin.Servlets.DeleteCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageTripServlet</servlet-name>
+        <servlet-class>Admin.Servlets.ManageTripServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RequestDriverServlet</servlet-name>
+        <servlet-class>Customer.RequestDriverServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PaymentServlet</servlet-name>
+        <servlet-class>Customer.PaymentServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProcessPaymentServlet</servlet-name>
+        <servlet-class>Customer.ProcessPaymentServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
@@ -181,16 +293,124 @@
         <url-pattern>/VehicleRetrieveServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>HelloServlet</servlet-name>
-        <url-pattern>/HelloServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>DashboardServlet</servlet-name>
         <url-pattern>/DashboardServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddVehicleServlet</servlet-name>
         <url-pattern>/AddVehicleServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductServlet</servlet-name>
+        <url-pattern>/ProductServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>bookVehicleServlet</servlet-name>
+        <url-pattern>/bookVehicleServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HistoryServlet</servlet-name>
+        <url-pattern>/HistoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelBookingServlet</servlet-name>
+        <url-pattern>/CancelBookingServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookingsServlet</servlet-name>
+        <url-pattern>/BookingsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CompleteTripServlet</servlet-name>
+        <url-pattern>/CompleteTripServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DashboardCountServlet</servlet-name>
+        <url-pattern>/DashboardCountServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookingServletView</servlet-name>
+        <url-pattern>/BookingServletView</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TotalEarningsServlet</servlet-name>
+        <url-pattern>/TotalEarningsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditProfileServlet</servlet-name>
+        <url-pattern>/EditProfileServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProfileServlet</servlet-name>
+        <url-pattern>/UpdateProfileServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VehicleManageServlet</servlet-name>
+        <url-pattern>/VehicleManageServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ApproveVehicleServlet</servlet-name>
+        <url-pattern>/ApproveVehicleServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RejectVehicleServlet</servlet-name>
+        <url-pattern>/RejectVehicleServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerEditProfileServlet</servlet-name>
+        <url-pattern>/CustomerEditProfileServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerUpdateProfileServlet</servlet-name>
+        <url-pattern>/CustomerUpdateProfileServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SampleServlet</servlet-name>
+        <url-pattern>/SampleServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageVehicleTypesServlet</servlet-name>
+        <url-pattern>/ManageVehicleTypesServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditVehicleTypeServlet</servlet-name>
+        <url-pattern>/EditVehicleTypeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteVehicleTypeServlet</servlet-name>
+        <url-pattern>/DeleteVehicleTypeServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageStaffServlet</servlet-name>
+        <url-pattern>/ManageStaffServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageCustomerServlet</servlet-name>
+        <url-pattern>/ManageCustomerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteStaffServlet</servlet-name>
+        <url-pattern>/DeleteStaffServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCustomerServlet</servlet-name>
+        <url-pattern>/DeleteCustomerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageTripServlet</servlet-name>
+        <url-pattern>/ManageTripServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RequestDriverServlet</servlet-name>
+        <url-pattern>/RequestDriverServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaymentServlet</servlet-name>
+        <url-pattern>/PaymentServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProcessPaymentServlet</servlet-name>
+        <url-pattern>/ProcessPaymentServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>

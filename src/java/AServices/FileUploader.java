@@ -1,46 +1,60 @@
-package Admin;
+package AServices;
 
 import jakarta.servlet.http.Part;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.*;
 
 public class FileUploader {
 
-    private final String uploadDirectory;
-
-    public FileUploader(String uploadDirectory) {
-        this.uploadDirectory = uploadDirectory;
-    }
-
-    public String uploadFile(Part filePart) throws IOException {
-        if (filePart == null) {
-            throw new IOException("File part is missing.");
-        }
-
-        String fileName = extractFileName(filePart);
+    public String saveFile(Part filePart) throws IOException {
+        // Get the filename from the Part object
+        String fileName = getFileName(filePart);
+        
         if (fileName == null || fileName.isEmpty()) {
-            throw new IOException("Invalid file name.");
+            throw new IOException("No file uploaded");
+        }
+        
+        // Define the upload directory (server-side directory where the file will be saved)
+        String uploadDir = "C:\\Users\\HP\\Documents\\NetBeansProjects\\Mega_City\\web\\vehicle_types";
+        
+        // Ensure the directory exists, create if necessary
+        File uploadFolder = new File(uploadDir);
+        if (!uploadFolder.exists()) {
+            if (!uploadFolder.mkdirs()) {
+                throw new IOException("Failed to create upload directory");
+            }
         }
 
-        fileName = fileName.replaceAll("\\s+", "_");
-        File uploadDir = new File(uploadDirectory);
-        if (!uploadDir.exists()) {
-            uploadDir.mkdir();
+        // Construct the path where the image will be saved
+        String filePath = uploadDir + File.separator + fileName;
+        
+        // Debug: Print out the full file path to verify
+        System.out.println("Saving file to: " + filePath);
+
+        // Save the file to the specified directory
+        try (InputStream inputStream = filePart.getInputStream();
+             OutputStream outputStream = new FileOutputStream(new File(filePath))) {
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+            System.out.println("File saved successfully!");
+        } catch (IOException e) {
+            // Log the error for better debugging
+            System.err.println("Error while saving the file: " + e.getMessage());
+            throw e;
         }
 
-        String savePath = uploadDirectory + fileName;
-        filePart.write(savePath);
-
-        return "vehicle_types/" + fileName;  // Relative path for database
+        // Return the relative path where the image has been saved
+        return "/vehicle_types/" + fileName;
     }
 
-    private String extractFileName(Part part) {
-        String contentDisp = part.getHeader("content-disposition");
-        if (contentDisp != null) {
-            for (String content : contentDisp.split(";")) {
-                if (content.trim().startsWith("filename")) {
-                    return content.substring(content.indexOf("=") + 2, content.length() - 1);
-                }
+    private String getFileName(Part part) {
+        String contentDisposition = part.getHeader("content-disposition");
+        for (String cd : contentDisposition.split(";")) {
+            if (cd.trim().startsWith("filename")) {
+                return cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
             }
         }
         return null;

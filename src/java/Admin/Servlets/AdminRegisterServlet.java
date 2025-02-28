@@ -1,5 +1,6 @@
-package Admin;
+package Admin.Servlets;
 
+import AServices.Admin;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -16,7 +17,12 @@ import jakarta.mail.internet.*;
 import java.util.Properties;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import Admin.DatabaseUtility;
+import AServices.DatabaseUtility;
+import AServices.DatabaseUtility;
+import Admin.EmailService;
+import AServices.OtpGenerator;
+import AServices.PasswordHasher;
+import AServices.UniqueIdGenerator;
 public class AdminRegisterServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     

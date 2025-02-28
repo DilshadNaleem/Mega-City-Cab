@@ -1,4 +1,4 @@
-package Admin;
+package Admin.Servlets;
 
 import java.sql.*;
 import jakarta.servlet.*;
@@ -8,6 +8,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import DatabaseConnection.*;
 
 
 public class AdminResetPasswordServet extends HttpServlet {

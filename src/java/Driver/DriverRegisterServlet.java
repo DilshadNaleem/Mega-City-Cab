@@ -1,12 +1,13 @@
 package Driver;
 
+import Driver.Class.Driver;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import Driver.DatabaseConnection;
+import DatabaseConnection.*;
 import jakarta.mail.Session;
 import jakarta.servlet.http.HttpSession;
 import java.sql.Connection;
@@ -95,35 +96,29 @@ private static final long serialVersionUID = 1L;
         }
     }
     
-    private String generateUniqueId()
-    {
-        String uniqueId = "DR_01";
-        Connection conn = null;
-        
-        try 
-        {
-           conn = DatabaseConnection.getConnection();
-           String query = "SELECT unique_id FROM driver ORDER BY unique_id DESC LIMIT 1";
-           PreparedStatement stmt = conn.prepareStatement(query);
-           ResultSet rs = stmt.executeQuery();
-           
-           if (rs.next())
-           {
-               String lastUniqueId = rs.getString("unique_id");
-               int lastNumber = Integer.parseInt(lastUniqueId.substring(3));
-               uniqueId = "DR_" + String.format("%02d" + lastNumber + 1);
-           }
-        } 
-        
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        } finally 
-        {
-            DatabaseConnection.closeConnection(conn);
+    private String generateUniqueId() {
+    String uniqueId = "DR_01";
+    Connection conn = null;
+
+    try {
+        conn = DatabaseConnection.getConnection();
+        String query = "SELECT unique_id FROM driver ORDER BY unique_id DESC LIMIT 1";
+        PreparedStatement stmt = conn.prepareStatement(query);
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            String lastUniqueId = rs.getString("unique_id");
+            int lastNumber = Integer.parseInt(lastUniqueId.substring(3)); // Extract number part
+            uniqueId = "DR_" + String.format("%02d", lastNumber + 1); // Proper formatting
         }
-        return uniqueId;
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    } finally {
+        DatabaseConnection.closeConnection(conn);
     }
+    return uniqueId;
+}
+
     
     private String generateOTP() 
     {

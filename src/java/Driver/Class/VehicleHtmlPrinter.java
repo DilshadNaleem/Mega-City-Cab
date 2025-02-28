@@ -1,4 +1,4 @@
-package Driver;
+package Driver.Class;
 
 import java.io.PrintWriter;
 import java.sql.*;
@@ -7,10 +7,10 @@ import jakarta.servlet.http.HttpSession;
 public class VehicleHtmlPrinter {
 
     public void printVehicleDetails(PrintWriter out, ResultSet rs, String searchQuery, HttpSession session) throws SQLException {
-        // Retrieve the driver email from session
+        // Retrieve the driver email from the session
         String driverEmail = (String) session.getAttribute("driveremail");
 
-        // If no driver email is found, you can handle it by showing an error or redirecting to login
+        // If no driver email is found, show an error or redirect to login
         if (driverEmail == null) {
             out.println("<p>You are not logged in. Please log in first.</p>");
             return;
@@ -27,16 +27,16 @@ public class VehicleHtmlPrinter {
         out.println("<div class='container mt-5'>");
         out.println("<h2 class='text-center mb-4'>Vehicle Details</h2>");
 
-        // Add search form (if needed for new searches) with Bootstrap styling
+        // Add search form with Bootstrap styling (if needed for new searches)
         out.println("<form method='get' action='VehicleRetrieveServlet' class='form-inline mb-4 justify-content-center'>");
         out.println("Search: <input type='text' name='search' class='form-control mr-2' placeholder='Enter vehicle name or brand' value='" + (searchQuery != null ? searchQuery : "") + "' />");
         out.println("<input type='submit' class='btn btn-primary' value='Search' />");
         out.println("</form>");
 
-        // Start HTML table to display data with Bootstrap styling
+        // Start the HTML table to display data with Bootstrap styling
         out.println("<table class='table table-bordered table-striped'>");
         out.println("<thead class='thead-dark'><tr>");
-        out.println("<th>Vehicle Name</th><th>Year</th><th>Brand</th><th>Condition</th><th>Mileage</th><th>Rent Per Day</th><th>Image</th><th>Action</th>");
+        out.println("<th>Vehicle Name</th><th>Year</th><th>Brand</th><th>Condition</th><th>Mileage</th><th>Rent Per Day</th><th>Image</th><th>Vehicle Type</th><th>Action</th>");
         out.println("</tr></thead>");
         out.println("<tbody>");
 
@@ -44,7 +44,7 @@ public class VehicleHtmlPrinter {
         while (rs.next()) {
             String vehicleEmail = rs.getString("driver_email");
 
-            // Check if the vehicle is associated with the logged-in driver
+            // Check if the vehicle is associated with the logged-in driver (only show vehicles of the logged-in driver)
             if (vehicleEmail != null && vehicleEmail.equals(driverEmail)) {
                 String vehicleName = rs.getString("vehicle_name");
                 String vehicleYear = rs.getString("vehicle_year");
@@ -53,9 +53,10 @@ public class VehicleHtmlPrinter {
                 String mileage = rs.getString("mileage");
                 String rentPerDay = rs.getString("rent_per_day");
                 String imagePath = rs.getString("vehicle_image_path");
-                String vehicleStatus = rs.getString("status"); // Assuming there's a "vehicle_status" column in the DB
+                String vehicleType = rs.getString("vehicle_cat");
+                String vehicleStatus = rs.getString("status"); // Assuming there's a "status" column in the DB
 
-                // Construct the full image path with hardcoded URL (avoid context path)
+                // Construct the full image path (ensure the URL is correct)
                 String fullImagePath = "http://localhost:8080/Mega_City/" + imagePath;
 
                 out.println("<tr>");
@@ -65,16 +66,16 @@ public class VehicleHtmlPrinter {
                 out.println("<td>" + condition + "</td>");
                 out.println("<td>" + mileage + "</td>");
                 out.println("<td>" + rentPerDay + "</td>");
-
-                // Displaying the image (ensure the image exists in the path)
+                
+                // Display the image if available
                 if (imagePath != null && !imagePath.isEmpty()) {
-                    // Display the image using the full image path
                     out.println("<td><img src='" + fullImagePath + "' alt='Vehicle Image' class='img-fluid' width='100' height='100'></td>");
                 } else {
                     out.println("<td>No image available</td>");
                 }
-
-                // Displaying the action column, which will show the vehicle's status
+                
+                out.println("<td>" + vehicleType + "</td>");
+                // Display the vehicle status (or a default message if status is unavailable)
                 out.println("<td>" + (vehicleStatus != null ? vehicleStatus : "Status not available") + "</td>");
                 out.println("</tr>");
             }

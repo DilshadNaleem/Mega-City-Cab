@@ -1,5 +1,6 @@
-package Admin;
+package Admin.Servlets;
 
+import AServices.ForgotPasswordEmail;
 import java.io.*;
 import java.sql.*;
 import jakarta.servlet.*;
@@ -9,6 +10,7 @@ import jakarta.mail.internet.*;
 import java.util.Properties;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import DatabaseConnection.*;
 
 
 public class AdminForgotPasswordServlet extends HttpServlet {

@@ -1,8 +1,9 @@
 
-package Customer;
+package Customer.CService;
 
 import java.sql.*;
 import java.sql.PreparedStatement;
+import DatabaseConnection.*;
 
 public class CustomerEditProfileClass {
   public static boolean updateDriverProfile(String firstName, String lastName, String phoneNumber, String email) {

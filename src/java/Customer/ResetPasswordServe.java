@@ -1,9 +1,11 @@
 package Customer;
 
+import Customer.CService.PasswordHasher;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import java.io.*;
 import java.sql.*;
+import DatabaseConnection.*;
 
 public class ResetPasswordServe extends HttpServlet {
 

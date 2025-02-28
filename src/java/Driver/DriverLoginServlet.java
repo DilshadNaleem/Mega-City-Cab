@@ -12,6 +12,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import DatabaseConnection.*;
 
 public class DriverLoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -59,7 +60,7 @@ public class DriverLoginServlet extends HttpServlet {
                 // Redirect to driver dashboard
                 out.println("<script type='text/javascript'>");
                 out.println("alert('Login successful!');");
-                out.println("window.location.href = '/Mega_City/Driver/Driver_Dashboard.html';"); // Update this URL if needed
+                out.println("window.location.href = '/Mega_City/Driver/Driver_Dashboard.jsp';"); // Update this URL if needed
                 out.println("</script>");
             } else {
                 // Invalid credentials

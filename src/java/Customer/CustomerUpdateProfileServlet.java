@@ -1,6 +1,8 @@
 
 package Customer;
 
+import Customer.CService.SessionHelper;
+import Customer.CService.CustomerEditProfileClass;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;

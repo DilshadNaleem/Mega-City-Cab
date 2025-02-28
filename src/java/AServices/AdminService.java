@@ -1,8 +1,9 @@
 
-package Admin;
+package AServices;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
+import DatabaseConnection.*;
 
 public class AdminService {
     

@@ -1,5 +1,6 @@
-package Customer;
+package Customer.CService;
 
+import Customer.Interface.EmailServiceInterface;
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
 import java.util.Properties;

@@ -1,5 +1,6 @@
-package Admin;
+package Admin.Servlets;
 
+import AServices.VehicleConfirmClass;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import jakarta.servlet.RequestDispatcher;
 import java.sql.PreparedStatement;
 import java.util.HashMap;
 import java.util.Map;
+import DatabaseConnection.*;
 
 public class VehicleManageServlet extends HttpServlet {
 

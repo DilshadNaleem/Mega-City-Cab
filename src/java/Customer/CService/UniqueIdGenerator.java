@@ -1,4 +1,4 @@
-package Customer;
+package Customer.CService;
 
 public class UniqueIdGenerator {
     public String generateUniqueId(DatabaseUtility dbUtility) {

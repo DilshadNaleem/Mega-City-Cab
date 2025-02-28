@@ -1,5 +1,5 @@
 
-package Admin;
+package AServices;
 
 public class PasswordRecoveryData {
     

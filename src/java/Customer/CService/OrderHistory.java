@@ -1,6 +1,8 @@
-package Customer;
+package Customer.CService;
 
 public class OrderHistory {
+    private int bookingId;
+    private String uniqueId;
     private String vehicleName;
     private String bookingDate;
     private String returnDate;
@@ -34,4 +36,10 @@ public class OrderHistory {
 
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+    
+    public int getBookingId() {return bookingId;}
+    public void setBookingId(int bookingId) {this.bookingId = bookingId;}
+    
+    public String getUniqueId() {return uniqueId;}
+    public void setUniqueId(String uniqueId) {this.uniqueId = uniqueId;}
 }

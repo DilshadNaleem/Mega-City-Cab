@@ -1,5 +1,5 @@
 
-package Admin;
+package Admin.Interface;
 
 import jakarta.mail.MessagingException;
 

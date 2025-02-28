@@ -1,4 +1,4 @@
-package Driver;
+package Driver.Class;
 
 public class BookingDetails {
     private String uniqueId;

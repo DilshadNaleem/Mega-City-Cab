@@ -1,7 +1,8 @@
 
-package Admin;
+package AServices;
 import java.sql.*;
 import java.sql.PreparedStatement;
+import DatabaseConnection.*;
 
 public class RejectedVehicleDatabaseClass {
     

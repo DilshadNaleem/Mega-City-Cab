@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hyper Zone</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="Home.css">
+   
     <style>
         :root {
     --light-blue-1: rgb(214, 235, 239);
@@ -24,6 +24,49 @@
     --border-radius: 5px;
 }
 
+@keyframes gradientAnimation 
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+
+
+@keyframes logoHover 
+    0% {
+        transform: scale(1) rotate(0deg);
+    }
+    50% {
+        transform: scale(1.05) rotate(5deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
 
 /* Reset */
 * {
@@ -144,50 +187,60 @@ header {
     color: var(--button-color); /* Change color on hover */
 }
 
+@keyframes logoHover 
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1); /* Slight zoom effect */
+    }
+    100% {
+        transform: scale(1); /* Return to original size */
+    }
 
 
 .search-bar {
     display: flex;
+    flex-direction: row; /* Ensure elements are in a row */
     align-items: center;
-    width: 60%;
+    justify-content: space-between; /* Ensure items are spaced evenly */
+    width: 60%; /* Full width of container */
     border: 2px solid #ccc;
     border-radius: 25px;
     overflow: hidden;
     background-color: transparent;
-    transition: box-shadow 0.3s ease; /* Add transition for shadow on focus */
+    transition: box-shadow 0.3s ease;
 }
 
 .search-bar:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .search-bar input[type="text"] {
-    flex-grow: 1;
+    flex-grow: 2; /* Allow input to take up the most space */
     border: none;
-    padding: 10px;
+    padding: 10px; /* Reduced padding to fit better */
     font-size: 16px;
     outline: none;
-    transition: border 0.3s ease, background-color 0.3s ease; /* Transition for border and background */
-    background-color: rgba(255, 255, 255, 0.8); /* Slight background for input */
+    width: 500px;
+    background-color: rgba(255, 255, 255, 0.8);
+    transition: border 0.3s ease, background-color 0.3s ease;
 }
 
 .search-bar input[type="text"]:focus {
-    border: 2px solid var(--button-color); /* Change border color on focus */
-    background-color: white; /* Full white background on focus */
+    border: 2px solid var(--button-color);
+    background-color: white;
 }
 
 .search-bar select {
     border: none;
     padding: 10px;
     background: white;
-    border-left: 1px solid #ccc;
     font-size: 16px;
-    cursor: pointer; /* Change cursor on hover */
-    transition: background 0.3s ease; /* Transition for background */
-}
-
-.search-bar select:hover {
-    background: rgba(0, 0, 0, 0.05); /* Light background on hover */
+    margin: 0 5px;
+    cursor: pointer;
+    flex-grow: 0; /* Prevent select from taking too much space */
+    width: auto; /* Ensure dropdown is only as wide as content */
 }
 
 .search-bar button {
@@ -196,17 +249,19 @@ header {
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Added transform */
-    border-radius: 0 25px 25px 0; /* Rounded right corners */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border-radius: 0 25px 25px 0;
+    white-space: nowrap; /* Prevent button text from wrapping */
+    flex-shrink: 0; /* Ensure the button doesn't shrink */
 }
 
 .search-bar button:hover {
     background-color: var(--button-hover-color);
-    transform: scale(1.05); /* Scale on hover */
+    transform: scale(1.05);
 }
 
 .search-bar button:active {
-    transform: scale(0.95); /* Scale down when pressed */
+    transform: scale(0.95);
 }
 
 /* MAIN MENU */
@@ -274,79 +329,90 @@ header {
     background-color: #f4f4f4;
 }
 
+       .image-slider {
+            width: 100%;               /* Full width */
+            height: 400px;             /* Set the height of the images */
+            overflow: hidden;          /* Hide the images outside the container */
+            position: relative;  
+            z-index: 1;/* Relative positioning for absolute children */
+        }
 
-/* Slider Styles */
-.slider-container {
-    position: relative;
-    max-width: 100%;
-    margin: auto;
-    overflow: hidden;
-    height: 500px; /* Adjust this as needed */
-    
-}
+        /* Style for the slider images */
+        .slider-image {
+            width: 100%;               /* Ensure images take up full width of the container */
+            height: auto;              /* Maintain aspect ratio */
+            object-fit: cover;         /* Crop images to fit */
+            position: absolute;        /* Stack images on top of each other */
+            top: 0;                    /* Align images at the top */
+            transition: left 1s ease, z-index 1s ease; /* Smooth transition for sliding and layering */
+        }
 
-.slider {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    transform: translateX(0);
-}
+        /* Initially, the images will be stacked on top of each other */
+        .image-slider img:nth-child(1) {
+            left: 0;
+            z-index: 2; /* This image will be on top initially */
+        }
 
-.slide {
-    min-width: 100%;
-    box-sizing: border-box;
-    position: relative;
-}
+        .image-slider img:nth-child(2) {
+            left: 100%;
+            z-index: 1; /* This image will be behind the first one initially */
+        }
 
-.slide img {
-    width: 100%;
-    height: 500px; /* Ensure the image height matches the container */
-    object-fit: cover; /* Ensure image fills the slide without distortion */
-    z-index: 1;
-}
+        /* Style for the slider buttons */
+        .slider-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 24px;
+            padding: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            z-index: 10;
+        }
 
-.slide-content {
-    position: absolute;
-    top: 50%;
-    left: 10%;
-    transform: translateY(-50%);
-    color: #fff;
-    max-width: 400px;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    padding: 20px;
-    border-radius: 10px;
-}
+        .prev-button {
+            left: 10px;
+        }
 
-.slide-content h2 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-}
+        .next-button {
+            right: 10px;
+        }
 
-.slide-content p {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-}
+        /* Content for quotes */
+        .slide-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            z-index: 3;
+            display: none; /* Hide content by default */
+        }
 
-/* Navigation Buttons */
-.prev, .next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    z-index: 10;
-    font-size: 2rem;
-}
+        .slide-content.active {
+            display: block; /* Only display the active slide's content */
+        }
 
-.prev {
-    left: 10px;
-}
+        .slide-content h2,
+        .slide-content h3,
+        .slide-content p {
+            margin: 0;
+        }
 
-.next {
-    right: 10px;
-}
+        .shop-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #ff5722;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
 
 .prev:hover, .next:hover {
     background-color: #333;
@@ -988,7 +1054,7 @@ button i {
     min-width: 200px; /* Slightly wider for better readability */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Softer shadow for a modern look */
     border-radius: 8px; /* Rounded corners */
-    z-index: 1;
+    z-index: 9999;
     opacity: 0; /* Start with hidden opacity */
     transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition for visibility */
     transform: translateY(10px); /* Slightly translate down for effect */
@@ -1058,10 +1124,10 @@ button i {
 }
 
 .account-icon:hover i {
-    transform: scale(1.1); /* Slightly enlarges the icon on hover */
+    transform: scale(1.1); /* Slightly enlarges the icon on hover */
 }
 
-        </style>
+    </style>
 </head>
 <body>
     <header>
@@ -1071,11 +1137,13 @@ button i {
                     <span class="account-icon"><i class="fas fa-user"></i> My Account</span>
                     <div class="dropdown-content">
                         <a href="#">Welcome, User</a>
-                        <a href="#">Profile</a>
-                        <a href="#">My Orders</a>
-                        <a href="#">Offers</a>
-                        <a href="#">FAQs</a>
-                        <a href="#">Logout</a>
+                        <a href="/Mega_City/CustomerEditProfileServlet">Profile</a>
+                        <a href="/Mega_City/HistoryServlet">My Orders</a>
+                        <a href="/Mega_City/PaymentServlet" > Payments </a>
+                        <a href="/Mega_City/Customer/Offers.jsp">Offers</a>
+                        <a href="/Mega_City/Customer/FAQs.jsp">FAQs</a>
+                        <a href="/Mega_City/Customer/RequestDriver.jsp"> Request as Driver </a>
+                        <a href="/Mega_City/Customer/Signin.html">Logout</a>
                     </div>
                 </a>
                 <a href="#" class="auth-link"><span>Daily Deals</span><i class="fas fa-tag"></i></a>
@@ -1084,21 +1152,13 @@ button i {
         </div>
 
         <div class="logo-search">
-            <a href="#" class="logo">Hyper Zone</a>
-            <div class="search-bar">
-                <input type="text" placeholder="Search for anything">
-                <select>
-                    <option value="all-categories">All Categories</option>
-                    <!-- Categories should be dynamically generated here -->
-                </select>
-                <button>Search</button>
-            </div>
-        </div>
+            <a href="#" class="logo">Mega City Cab</a>
+                    </div>
 
         <nav class="main-menu" id="navbar">
             <ul>
                 <li><a href="about.php">About Us</a></li>
-                <li><a href="save_wishlist.php">Saved</a></li>
+             
                 <!-- Categories should be dynamically generated here -->
             </ul>
         </nav>
@@ -1116,22 +1176,35 @@ button i {
         </div>
     </header>
 
-    <div class="slider-container">
-        <div class="slider">
-            <div class="slide active">
-                <img src="slide1.jpg" alt="Slide 1">
-                <div class="slide-content">
-                    <h2>Slide 1 Title</h2>
-                    <h3>Slide 1 Subtitle</h3>
-                    <p>Slide 1 description goes here.</p>
-                    <a href="#" class="shop-btn">Shop Now</a>
-                </div>
-            </div>
-            <!-- More slides can be added here -->
+    
+    
+
+ <!-- Image slider container -->
+    <div class="image-slider">
+        <img src="/Mega_City/Customer/slide1.jpeg" alt="Image 1" class="slider-image">
+        <div class="slide-content" id="slide1">
+            <h2>Slide 1 Title</h2>
+            <h3>Slide 1 Subtitle</h3>
+            <p>Slide 1 description goes here.</p>
+            <a href="#" class="shop-btn">Shop Now</a>
         </div>
-        <button class="prev">&#10094;</button>
-        <button class="next">&#10095;</button>
+
+        <img src="/Mega_City/Customer/slider2.jpeg" alt="Image 2" class="slider-image">
+        <div class="slide-content" id="slide2">
+            <h2>Slide 2 Title</h2>
+            <h3>Slide 2 Subtitle</h3>
+            <p>Slide 2 description goes here.</p>
+            <a href="#" class="shop-btn">Shop Now</a>
+        </div>
+
+        <!-- Slider buttons -->
+        <button class="slider-button prev-button">&#10094;</button>
+        <button class="slider-button next-button">&#10095;</button>
     </div>
+
+
+
+
 
     
 
@@ -1153,7 +1226,7 @@ button i {
             for (Map<String, String> vehicle : vehicles) {
         %>
             <!-- The link redirects to Vehicle_Category.jsp with the vehicle name as a query parameter -->
-            <a href="/Mega_City/Customer/Vehicle_Category.jsp?vehicleName=<%= URLEncoder.encode(vehicle.get("vehicleName"), "UTF-8") %>" class="category-item">
+            <a href="/Mega_City/ProductServlet?vehicleType=<%= URLEncoder.encode(vehicle.get("vehicleName"), "UTF-8") %>" class="category-item">
                 <div>
                     <h3><%= vehicle.get("vehicleName") %></h3>
                     <img src="http://localhost:8080/Mega_City/<%= vehicle.get("imagePath") %>" alt="<%= vehicle.get("vehicleName") %>">
@@ -1169,4 +1242,44 @@ button i {
 
     
 </body>
+
+
+<script>
+    let currentIndex = 0;
+    const images = document.querySelectorAll('.slider-image');
+    const slideContents = document.querySelectorAll('.slide-content');
+    const prevButton = document.querySelector('.prev-button');
+    const nextButton = document.querySelector('.next-button');
+
+    function changeSlide(direction) {
+        // Hide the current image by moving it out of view
+        images[currentIndex].style.left = direction === 'next' ? '-100%' : '100%';
+        images[currentIndex].style.zIndex = 1;  // Move the current image behind
+        slideContents[currentIndex].classList.remove('active'); // Hide the current content
+
+        // Move the next image into view
+        const nextIndex = (currentIndex + (direction === 'next' ? 1 : -1) + images.length) % images.length;
+        images[nextIndex].style.left = '0';
+        images[nextIndex].style.zIndex = 2;  // Bring the next image to the front
+        slideContents[nextIndex].classList.add('active'); // Show the next content
+
+        // Update current index
+        currentIndex = nextIndex;
+    }
+
+    // Button click listeners
+    prevButton.addEventListener('click', () => changeSlide('prev'));
+    nextButton.addEventListener('click', () => changeSlide('next'));
+
+    // Initially show the first image and content
+    images[currentIndex].style.left = '0';
+    images[currentIndex].style.zIndex = 2;
+    slideContents[currentIndex].classList.add('active');
+
+    // Auto change slide every 5 seconds
+    setInterval(() => changeSlide('next'), 5000);
+</script>
+
+
+
 </html>

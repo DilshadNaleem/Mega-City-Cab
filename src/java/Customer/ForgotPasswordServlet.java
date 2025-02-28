@@ -1,10 +1,13 @@
 package Customer;
 
+import Customer.CService.ForgotPasswordEmail;
 import java.io.*;
 import java.sql.*;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.mail.MessagingException;
+import DatabaseConnection.*;
+
 
 public class ForgotPasswordServlet extends HttpServlet {
 

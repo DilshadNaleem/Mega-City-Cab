@@ -1,17 +1,16 @@
 package Driver;
 
+import Driver.Class.FileService;
+import Driver.Class.VehicleService;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.*;
 import java.io.*;
 import java.sql.*;
 
-@MultipartConfig
 public class VehicleSaveServlet extends HttpServlet {
 
     private VehicleService vehicleService;
 
-    // Constructor or initialization method
     @Override
     public void init() {
         vehicleService = new VehicleService(new FileService()); // Inject FileService here
@@ -26,16 +25,8 @@ public class VehicleSaveServlet extends HttpServlet {
         String mileage = request.getParameter("mileage");
         String rentPerDay = request.getParameter("rent_per_day");
         String color = request.getParameter("color");
-        String VehicleType = request.getParameter("type");
-
-        // Retrieve image part
-        Part filePart = request.getPart("vehicle_image");
-        String imagePath = null;
-
-        // Save the file and get the image path
-        if (filePart != null && filePart.getSize() > 0) {
-            imagePath = vehicleService.saveVehicleImage(filePart);
-        }
+        String vehicleType = request.getParameter("type");
+        String vehicleImage = "/vehicle_uploads/" +request.getParameter("vehicle_image"); // Now taking image path as a string
 
         // Retrieve driver's email from session
         HttpSession session = request.getSession();
@@ -47,7 +38,7 @@ public class VehicleSaveServlet extends HttpServlet {
 
         // Save the vehicle to the database
         try {
-            vehicleService.saveVehicle(vehicleName, vehicleYear, brandName, condition, mileage, rentPerDay, imagePath, driverEmail,color, VehicleType);
+            vehicleService.saveVehicle(vehicleName, vehicleYear, brandName, condition, mileage, rentPerDay, vehicleImage, driverEmail, color, vehicleType);
             response.getWriter().write("Vehicle added successfully!");
         } catch (SQLException e) {
             e.printStackTrace();

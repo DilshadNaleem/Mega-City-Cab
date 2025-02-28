@@ -1,29 +1,17 @@
 
-package Admin;
+package AServices;
+import AServices.Admin;
 import java.sql.*;
 import java.sql.PreparedStatement;
+import DatabaseConnection.*;
 
 public class DatabaseUtility {
     
-     private static final String DB_URL = "jdbc:mysql://localhost:3306/mega_city";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "";
-
-    static {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException("MySQL Driver not found!", e);
-        }
-    }
-
-    public Connection connect() throws SQLException {
-        return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-    }
+    
 
     public boolean isEmailRegistered(String email) throws SQLException {
         String query = "SELECT email FROM admin WHERE email = ?";
-        try (Connection conn = connect();
+        try (Connection conn = DatabaseConnection.getConnection();
              java.sql.PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, email);
             ResultSet rs = stmt.executeQuery();

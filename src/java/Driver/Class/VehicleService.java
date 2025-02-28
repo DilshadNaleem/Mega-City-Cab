@@ -1,7 +1,7 @@
+package Driver.Class;
 
-package Driver;
-
-import jakarta.servlet.http.Part; // Correct import for file uploads
+import DatabaseConnection.*;
+import jakarta.servlet.http.Part;
 import java.io.IOException;
 import java.sql.*;
 
@@ -9,7 +9,6 @@ public class VehicleService {
 
     private FileService fileService;
 
-    // Constructor to inject FileService dependency
     public VehicleService(FileService fileService) {
         this.fileService = fileService;
     }
@@ -18,27 +17,41 @@ public class VehicleService {
                             String mileage, String rentPerDay, String imagePath, String driverEmail, String color, String type) throws SQLException {
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(
-                    "INSERT INTO vehicles (vehicle_name, vehicle_year, brand_name, vehicle_condition, mileage, rent_per_day, vehicle_image_path, driver_email, status, created_at,color,type) " +
-                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'Pending', NOW(),?,?)")) {
-
-            stmt.setString(1, vehicleName);
-            stmt.setString(2, vehicleYear);
-            stmt.setString(3, brandName);
-            stmt.setString(4, condition);
-            stmt.setString(5, mileage);
-            stmt.setString(6, rentPerDay);
-            stmt.setString(7, imagePath != null ? imagePath : "");
-            stmt.setString(8, driverEmail);
-            stmt.setString(9, color);
-            stmt.setString(10, type);
+                    "INSERT INTO vehicles (unique_id, vehicle_name, vehicle_year, brand_name, vehicle_condition, mileage, rent_per_day, vehicle_image_path, driver_email, status, created_at, color, vehicle_cat) " +
+                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'Pending', NOW(), ?, ?)")
+        ) {
+            String vehicleId = generateUniqueVehicleId(conn);
+            
+            stmt.setString(1, vehicleId);
+            stmt.setString(2, vehicleName);
+            stmt.setString(3, vehicleYear);
+            stmt.setString(4, brandName);
+            stmt.setString(5, condition);
+            stmt.setString(6, mileage);
+            stmt.setString(7, rentPerDay);
+            stmt.setString(8, imagePath != null ? imagePath : "");
+            stmt.setString(9, driverEmail);
+            stmt.setString(10, color);
+            stmt.setString(11, type);
 
             stmt.executeUpdate();
         }
     }
 
-    public String saveVehicleImage(Part filePart) throws IOException {
-        return fileService.saveFile(filePart); // Use the correct file service to save the image
+    private String generateUniqueVehicleId(Connection conn) throws SQLException {
+        String query = "SELECT unique_id FROM vehicles ORDER BY created_at DESC LIMIT 1";
+        try (PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                String lastId = rs.getString("unique_id");
+                int num = Integer.parseInt(lastId.split("_")[1]) + 1;
+                return String.format("VEH_%02d", num);
+            }
+        }
+        return "VEH_01"; // Default for first vehicle
     }
-    
-    
+
+    public String saveVehicleImage(Part filePart) throws IOException {
+        return fileService.saveFile(filePart);
+    }
 }

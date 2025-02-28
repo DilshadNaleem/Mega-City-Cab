@@ -13,6 +13,7 @@ import java.sql.*;
 import java.util.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import DatabaseConnection.*;
 
 
 public class DriverResetPasswordServet extends HttpServlet {

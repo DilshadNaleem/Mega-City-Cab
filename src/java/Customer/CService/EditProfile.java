@@ -1,5 +1,5 @@
 
-package Customer;
+package Customer.CService;
 
 
 public class EditProfile {

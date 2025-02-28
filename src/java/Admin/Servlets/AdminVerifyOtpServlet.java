@@ -1,5 +1,5 @@
 
-package Admin;
+package Admin.Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpSession;
 import java.sql.Connection;
 import java.sql.*;
 import java.sql.PreparedStatement;
+import DatabaseConnection.*;
 
 /**
  *

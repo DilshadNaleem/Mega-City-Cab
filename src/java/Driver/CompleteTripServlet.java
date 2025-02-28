@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
 import java.util.Properties;
+import DatabaseConnection.*;
 
 public class CompleteTripServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;

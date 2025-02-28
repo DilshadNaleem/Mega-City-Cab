@@ -1,5 +1,5 @@
 
-package Driver;
+package Driver.Class;
 
 
 public class BookingView {

@@ -1,4 +1,4 @@
-package Customer;
+package Customer.Interface;
 
 import jakarta.mail.MessagingException;
 

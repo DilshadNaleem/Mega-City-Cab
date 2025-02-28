@@ -1,9 +1,12 @@
 package Driver;
 
+import Driver.Class.VehicleSearchService;
+import Driver.Class.VehicleHtmlPrinter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import java.io.*;
 import java.sql.*;
+import DatabaseConnection.*;
 
 public class VehicleRetrieveServlet extends HttpServlet {
 

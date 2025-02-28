@@ -8,12 +8,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import Customer.CustomerService;
+import Customer.CService.CustomerService;
 
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
                 // Login failed
                 out.println("<script type='text/javascript'>");
                 out.println("alert('Invalid email or password, or account not verified.');");
-                out.println("window.location.href = 'login.html';");
+                out.println("window.location.href = '/Mega_City/Customer/Signin.html';");
                 out.println("</script>");
             }
         } catch (Exception e) {
@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     // Hashing method using SHA-256
-    private String hashPassword(String password) {
+    public String hashPassword(String password) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hashedBytes = digest.digest(password.getBytes("UTF-8"));

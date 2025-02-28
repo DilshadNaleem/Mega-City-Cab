@@ -1,5 +1,7 @@
 package Customer;
 
+import Customer.CService.vehicleBookingDAO;
+import Customer.CService.BookVehicleBooking;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +11,7 @@ import jakarta.mail.*;
 import jakarta.mail.internet.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
+import DatabaseConnection.*;
 
 public class bookVehicleServlet extends HttpServlet {
 
@@ -21,7 +24,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
     String returnDate = request.getParameter("returndate");
     String rentPerDay = request.getParameter("rentperday");
     double totalFare = Double.parseDouble(request.getParameter("totalPrice"));
-
+    String uniqueId = getUniqueId();
     // Get customer details from session
     HttpSession session = request.getSession();
     String customerName = (String) session.getAttribute("customerName");
@@ -39,7 +42,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
     try (Connection conn = DatabaseConnection.getConnection()) {
         // Check for overlapping bookings for the selected vehicle
         String checkBookingQuery = "SELECT booking_date, return_date FROM vehicle_bookings WHERE vehicle_name = ? " +
-                "AND ((? BETWEEN booking_date AND return_date) OR (? BETWEEN booking_date AND return_date))";
+                "AND ((? BETWEEN booking_date AND return_date) OR (? BETWEEN booking_date AND return_date))" + "AND status = 'Booked'";
         try (PreparedStatement ps = conn.prepareStatement(checkBookingQuery)) {
             ps.setString(1, vehicleName);
             ps.setString(2, bookingDate);  // Check if bookingDate is within the booked period
@@ -51,7 +54,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
                     String bookedUntilDate = rs.getString("return_date");
                     String alertMessage = "The vehicle is already booked until " + bookedUntilDate;
                     response.setContentType("text/html");
-                    response.getWriter().println("<script type='text/javascript'>alert('" + alertMessage + "');window.location='bookingPage.jsp';</script>");
+                    response.getWriter().println("<script type='text/javascript'>alert('" + alertMessage + "');window.location='/Mega_City/DashboardServlet';</script>");
                     return; // Stop further processing
                 }
             }
@@ -91,8 +94,20 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
     }
 
     // Create booking record
-    BookVehicleBooking booking = new BookVehicleBooking(vehicleName, bookingDate, bookingTime, returnDate, rentPerDay, customerName, String.valueOf(totalFare), customerEmail);
-    bookingDAO.addBooking(booking);
+    // Create booking record using Builder pattern
+BookVehicleBooking booking = new BookVehicleBooking.Builder()
+    .setVehicleName(vehicleName)
+    .setUniqueId(uniqueId)
+    .setBookingDate(bookingDate)
+    .setBookingTime(bookingTime)
+    .setReturnDate(returnDate)
+    .setRentPerDay(rentPerDay)
+    .setCustomerName(customerName)
+    .setTotalFare(String.valueOf(totalFare))
+    .setEmail(customerEmail)
+    .build();
+
+bookingDAO.addBooking(booking);
 
     // Update customer type to loyalty if eligible
     if (tripCount >= 5) {
@@ -155,4 +170,31 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             e.printStackTrace();
         }
     }
+    
+private String getUniqueId() {
+    String uniqueId = "order_01"; // Default for first entry
+
+    try (Connection conn = DatabaseConnection.getConnection()) {
+        String query = "SELECT unique_id FROM vehicle_bookings ORDER BY booking_id DESC LIMIT 1";
+        try (PreparedStatement ps = conn.prepareStatement(query);
+             ResultSet rs = ps.executeQuery()) {
+
+            if (rs.next()) {
+                String lastId = rs.getString("unique_id"); // Get last unique_id
+                if (lastId != null && lastId.startsWith("order_")) {
+                    String numberPart = lastId.substring(6); // Extract numeric part
+                    int num = Integer.parseInt(numberPart); // Convert to int
+                    num++; // Increment by 1
+                    uniqueId = String.format("order_%02d", num); // Format as "order_XX"
+                }
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return uniqueId;
+}
+
+
 }

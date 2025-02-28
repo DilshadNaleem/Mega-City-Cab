@@ -6,6 +6,7 @@ import java.io.*;
 import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
+import DatabaseConnection.*;
 
 public class DashboardServlet extends HttpServlet {
 
@@ -33,7 +34,7 @@ public class DashboardServlet extends HttpServlet {
 
             // SQL queries to fetch vehicle categories and images
             String categoryQuery = "SELECT vehicle_cat FROM vehicle_types";
-            String imageQuery = "SELECT vehicle_image FROM vehicle_types";
+            String imageQuery = "SELECT vehicle_image FROM vehicle_types  ";
 
             // Lists to store vehicle categories and images
             List<String> categories = new ArrayList<>();

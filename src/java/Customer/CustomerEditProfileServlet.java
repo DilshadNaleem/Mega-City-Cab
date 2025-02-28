@@ -1,6 +1,7 @@
 
 package Customer;
 
+import Customer.CService.EditProfile;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.sql.*;
 import java.sql.PreparedStatement;
+import DatabaseConnection.*;
 
 /**
  *
