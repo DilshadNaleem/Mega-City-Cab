@@ -4,7 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import java.io.*;
 import Customer.CService.*;
-
+// Register 
 public class RegisterServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

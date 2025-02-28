@@ -1,5 +1,5 @@
 package Customer.CService;
-
+// Otp
 import java.util.Random;
 
 public class OtpGenerator {
