@@ -6,7 +6,7 @@ import java.io.*;
 import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
-import DatabaseConnection.*;
+import DatabaseConnection.DatabaseConnection;
 
 public class DashboardServlet extends HttpServlet {
 
