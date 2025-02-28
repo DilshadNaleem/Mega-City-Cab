@@ -1,4 +1,4 @@
-package Customer.CService;
+package Customer;
 
 import java.util.Random;
 
