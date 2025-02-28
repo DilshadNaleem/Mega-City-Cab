@@ -3,7 +3,7 @@ package Customer.CService;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+//
 public class CustomerHelper {
 
     public static boolean isAccountVerified(Connection conn, String email) throws Exception {
