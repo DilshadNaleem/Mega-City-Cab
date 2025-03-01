@@ -1,9 +1,11 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="Driver.EditProfile"%>
+<%@page import="Driver.Class.EditProfile"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Edit Profile</title>
+    <!-- Bootstrap CSS link -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -34,13 +36,32 @@
             border-radius: 5px;
         }
         button {
-            background-color: #28a745;
+            background-color: #0073bb;
             color: white;
             font-size: 16px;
             cursor: pointer;
+            width: 150px;
+            height: 40px;
+            margin-top: 20px;
         }
         button:hover {
-            background-color: #218838;
+            background-color: #5196c1;
+        }
+        .back-btn {
+            background-color: #0073bb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            width: 150px;
+            height: 40px;
+            font-size: 14px;
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .back-btn:hover {
+            background-color: #5196c1;
         }
     </style>
 </head>
@@ -95,6 +116,14 @@
         </form>
 
         <% } %>
+
+        <!-- Back button -->
+        <button class="back-btn" onclick="window.history.back();">Back</button>
     </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

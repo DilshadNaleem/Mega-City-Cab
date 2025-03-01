@@ -208,7 +208,7 @@
 
     <li><a href="#" class="submenu-toggle"><i class="glyphicon glyphicon-list-alt"></i> Requests</a>
     <ul class="submenu">
-      <li><a href="/Mega_City/RequestDriverServlet">Request for Driver</a></li>
+      <li><a href="/Mega_City/ManageRequestDriverServlet">Request for Driver</a></li>
      
     </ul>
     </li>

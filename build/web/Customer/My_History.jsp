@@ -1,3 +1,4 @@
+
 <%@ page import="java.util.ArrayList" %>
 <%@page import="Customer.CService.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -8,11 +9,54 @@
     <title>Booking History</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 30px;
+        }
+        h2 {
+            color: #0073bb;
+        }
+        .alert-info {
+            background-color: #5196c1;
+            border-color: #5196c1;
+            color: white;
+        }
+        .table th {
+            background-color: #0073bb;
+            color: white;
+        }
+        .table td {
+            vertical-align: middle;
+        }
+        .badge {
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #c82333;
+        }
+        .btn-sm {
+            padding: 5px 10px;
+        }
+        .table-responsive {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body class="bg-light">
 
     <div class="container mt-5">
+        <!-- Back Button -->
+       
+
         <h2 class="text-center mb-4">Booking History</h2>
 
         <%-- Display success or error messages from session --%>
@@ -88,6 +132,7 @@
                     %>
                 </tbody>
             </table>
+                 <button class="btn btn-secondary mb-4" onclick="history.back()">Back</button>
         </div>
     </div>
 

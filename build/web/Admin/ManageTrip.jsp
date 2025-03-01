@@ -5,34 +5,93 @@
 <html>
 <head>
     <title>Manage Trips</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
-        table { width: 100%; border-collapse: collapse; }
-        th, td { border: 1px solid black; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
+        /* Custom Styles */
+        table {
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #5196c1;
+            color: white;
+        }
+        td {
+            background-color: #f9f9f9;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Back Button Styling */
+        .back-btn {
+            background-color: #0073bb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 150px;
+            height: 50px;
+            display: block;
+            margin: 30px auto;
+        }
+        .back-btn:hover {
+            background-color: #005fa3;
+        }
+
+        /* Filter Form Styling */
+        .filter-form {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .filter-form select, .filter-form input {
+            margin-right: 10px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .filter-form button {
+            padding: 10px 20px;
+            background-color: #5196c1;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .filter-form button:hover {
+            background-color: #005fa3;
+        }
     </style>
 </head>
 
 <body>
-    <h2>Manage Trips</h2>
+    <h2 class="text-center text-primary">Manage Trips</h2>
 
-    <form method="get" action="ManageTripServlet">
+    <form method="get" action="ManageTripServlet" class="filter-form">
         <!-- Status Filter -->
-        <label for="status">Status:</label>
-        <select name="status" id="status">
+        <label for="status" class="mr-2">Status:</label>
+        <select name="status" id="status" class="form-control">
             <option value="all">All</option>
             <option value="booked">Booked</option>
             <option value="completed">Complete</option>
         </select>
 
         <!-- Search Filter -->
-        
-        <button type="submit">Filter</button>
-        <label for="search">Search:</label>
-        <input type="text" name="search" id="search" placeholder="Enter Details">
+        <label for="search" class="mr-2">Search:</label>
+        <input type="text" name="search" id="search" class="form-control" placeholder="Enter Details">
 
+        <button type="submit" class="btn btn-primary">Filter</button>
     </form>
 
-    <table>
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Unique ID</th>
@@ -88,12 +147,21 @@
             } else { 
             %>
             <tr>
-                <td colspan="15" style="text-align: center;">No trips found.</td>
+                <td colspan="14" style="text-align: center;">No trips found.</td>
             </tr>
             <% 
             } 
             %>
         </tbody>
     </table>
+
+    <!-- Back Button -->
+    <button class="back-btn" onclick="history.back()">Go Back</button>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>
