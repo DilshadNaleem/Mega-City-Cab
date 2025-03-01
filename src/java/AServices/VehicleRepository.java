@@ -14,7 +14,6 @@ public class VehicleRepository {
     }
     
   
-
     public void saveVehicle(String uniqueId, String category, String description, String imagePath) throws SQLException {
         String sql = "INSERT INTO vehicle_types (unique_id, vehicle_cat, vehicle_desc, vehicle_image, created_at) VALUES (?, ?, ?, ?, NOW())";
         try (Connection conn = DatabaseConnection.getConnection();

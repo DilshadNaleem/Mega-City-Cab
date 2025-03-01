@@ -17,6 +17,7 @@ import java.sql.*;
 public class AddVehicleServlet extends HttpServlet {
 private VehicleRepository vehicleService;
 
+
     public void init() 
     {
         vehicleService = new VehicleRepository(new FileUploader());

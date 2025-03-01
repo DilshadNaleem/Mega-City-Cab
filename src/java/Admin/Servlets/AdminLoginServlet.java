@@ -21,7 +21,7 @@ public class AdminLoginServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        // Get input values from the form
+       
         String email = request.getParameter("username");
         String password = request.getParameter("password");
 
