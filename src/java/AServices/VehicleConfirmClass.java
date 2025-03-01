@@ -1,7 +1,6 @@
 
 package AServices;
 
-
 public class VehicleConfirmClass {
     String Id;
     String vehicleName;

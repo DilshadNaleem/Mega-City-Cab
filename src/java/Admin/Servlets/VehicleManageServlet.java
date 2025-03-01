@@ -26,6 +26,7 @@ public class VehicleManageServlet extends HttpServlet {
             return;
         }
 
+        
         try {
             Connection conn = DatabaseConnection.getConnection();
             if (conn == null) {
