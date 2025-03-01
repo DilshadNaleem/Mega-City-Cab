@@ -13,10 +13,7 @@ import java.sql.*;
 import java.sql.PreparedStatement;
 import DatabaseConnection.*;
 
-/**
- *
- * @author HP
- */
+
 public class AdminVerifyOtpServlet extends HttpServlet {
  private static final long serialVersionUID = 1L;
  
