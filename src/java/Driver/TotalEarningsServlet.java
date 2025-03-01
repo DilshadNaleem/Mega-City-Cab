@@ -26,6 +26,7 @@ public class TotalEarningsServlet extends HttpServlet {
             return;
         }
 
+        
         try (Connection conn = DatabaseConnection.getConnection()) {
             if (conn == null) {
                 System.out.println("Database connection is null");
