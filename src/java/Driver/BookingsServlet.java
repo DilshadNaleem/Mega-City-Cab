@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import DatabaseConnection.*;
+import DatabaseConnection.DatabaseConnection;
 
 public class BookingsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
