@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import java.sql.*;
 import DatabaseConnection.*;
 
+
 public class DeleteStaffServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
