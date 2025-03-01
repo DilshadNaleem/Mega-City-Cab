@@ -7,7 +7,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.mail.MessagingException;
 import DatabaseConnection.*;
-
+//
 
 public class ForgotPasswordServlet extends HttpServlet {
 
