@@ -1,7 +1,6 @@
 
 package AServices;
 
-
 public class ManageVehicleTypeClass {
     String id;
     String vehicleCategory;
