@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import DatabaseConnection.*;
 
+
 public class DeleteVehicleTypeServlet extends HttpServlet {
   
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
