@@ -1,6 +1,5 @@
 package Driver.Class;
 
-
 public class Driver {
     private String uniqueId;
     private String firstName;
