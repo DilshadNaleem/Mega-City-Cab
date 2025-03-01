@@ -12,7 +12,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import DatabaseConnection.*;
 
-
 public class AdminForgotPasswordServlet extends HttpServlet {
 
    private Connection conn;

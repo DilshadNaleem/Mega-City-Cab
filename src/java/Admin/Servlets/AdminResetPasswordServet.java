@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import DatabaseConnection.*;
 
-
 public class AdminResetPasswordServet extends HttpServlet {
 
     private Connection conn;
