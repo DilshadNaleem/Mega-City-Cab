@@ -6,13 +6,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vehicle Management</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Add your own CSS file if needed -->
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJYy6aA7vJzF5ZC8msE5fKhuQ1ZzbyWqZTc+zJv0z7d6RmI0dZp1uNGp5Fts" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #0073bb;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #5196c1;
+            color: white;
+        }
+        td {
+            background-color: #f9f9f9;
+        }
+        button {
+            background-color: #5196c1;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0073bb;
+        }
+        .back-btn {
+            width: 150px;  /* Set fixed width */
+            height: 50px;  /* Set fixed height */
+            background-color: #5196c1;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;  /* Set a readable font size */
+            text-align: center;
+        }
+        .back-btn:hover {
+            background-color: #0073bb;
+        }
+    </style>
 </head>
 <body>
     <h1>Manage Vehicles</h1>
 
     <!-- Displaying the vehicles -->
-    <table border="1">
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Vehicle ID </th>
@@ -81,5 +133,14 @@
             %>
         </tbody>
     </table>
+
+    <!-- Back Button -->
+    <button class="back-btn" onclick="back()">Back</button>
+
+    <script>
+        function back() {
+            window.history.back();  // JavaScript function to navigate back
+        }
+    </script>
 </body>
 </html>

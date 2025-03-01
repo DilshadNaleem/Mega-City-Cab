@@ -1,4 +1,4 @@
-<%@ page import="java.sql.*, java.util.*, Driver.DatabaseConnection" %>
+<%@ page import="java.sql.*, java.util.*, DatabaseConnection.DatabaseConnection" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">

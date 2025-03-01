@@ -2,23 +2,31 @@
 <%@page import="java.util.HashMap" %>
 <%@page import="Customer.CService.*" %>
 
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile</title>
+
+    <!-- Bootstrap 4 CSS (or you can use the latest Bootstrap version) -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
         }
         .container {
-            width: 50%;
+            max-width: 600px;
             margin: auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
+            padding: 30px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         h1 {
             text-align: center;
+            color: #0073bb;
         }
         .error {
             color: red;
@@ -29,7 +37,7 @@
             display: block;
             margin-top: 10px;
         }
-        input, button {
+        .form-control {
             width: 100%;
             padding: 10px;
             margin-top: 5px;
@@ -37,15 +45,38 @@
             border-radius: 5px;
         }
         button {
-            background-color: #28a745;
+            background-color: #0073bb;
             color: white;
             font-size: 16px;
             cursor: pointer;
             border: none;
             margin-top: 15px;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
         }
         button:hover {
-            background-color: #218838;
+            background-color: #5196c1;
+        }
+        .alert {
+            background-color: #0073bb;
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .back-button {
+            background-color: #5196c1;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .back-button:hover {
+            background-color: #0073bb;
         }
     </style>
 </head>
@@ -63,12 +94,12 @@
         <%-- Display success message as an alert --%>
         <% String successMessage = (String) request.getAttribute("successMessage"); %>
         <% if (successMessage != null) { %>
-            <script>
-                alert("<%= successMessage %>");
-            </script>
+            <div class="alert alert-success">
+                <%= successMessage %>
+            </div>
         <% } %>
 
-        <%
+        <% 
             Map<String, EditProfile> profileDetails = (HashMap<String, EditProfile>) request.getAttribute("profileDetails");
             EditProfile profile = null;
             
@@ -83,27 +114,36 @@
 
         <form action="/Mega_City/CustomerUpdateProfileServlet" method="post">
             <label>First Name:</label>
-            <input type="text" name="firstName" value="<%= profile.getFirstName() %>" required>
+            <input type="text" class="form-control" name="firstName" value="<%= profile.getFirstName() %>" required>
 
             <label>Last Name:</label>
-            <input type="text" name="lastName" value="<%= profile.getLastName() %>" required>
+            <input type="text" class="form-control" name="lastName" value="<%= profile.getLastName() %>" required>
 
             <label>Email:</label>
-            <input type="email" name="email" value="<%= profile.getEmail() %>" readonly>
+            <input type="email" class="form-control" name="email" value="<%= profile.getEmail() %>" readonly>
 
             <label>Contact Number:</label>
-            <input type="text" name="contactNumber" value="<%= profile.getContactnumber() %>" required>
+            <input type="text" class="form-control" name="contactNumber" value="<%= profile.getContactnumber() %>" required>
 
             <label>NIC:</label>
-            <input type="text" name="nic" value="<%= profile.getNic() %>" readonly>
+            <input type="text" class="form-control" name="nic" value="<%= profile.getNic() %>" readonly>
 
             <label>Status:</label>
-            <input type="text" name="status" value="<%= profile.getStatus() %>" readonly>
+            <input type="text" class="form-control" name="status" value="<%= profile.getStatus() %>" readonly>
 
-            <button type="submit">Update Profile</button>
+            <button type="submit" class="btn btn-primary">Update Profile</button>
         </form>
 
         <% } %>
+
+        <!-- Back Button -->
+        <button class="back-button" onclick="history.back()">Back</button>
+
     </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -196,14 +196,14 @@
       
       <li><a href="#" class="submenu-toggle"><i class="glyphicon glyphicon-duplicate"></i> Earnings</a>
         <ul class="nav submenu">
-          <li><a href="">Total Trips</a></li>
-          <li><a href="">Profit</a></li>
+          <li><a href="/Mega_City/TotalEarningsServlet">Total Earnings</a></li>
+          
          
          
         </ul>
       </li>
      
-      <li><a href="../../LiveChatWithVideo/" class="submenu-toggle"><i class="fas fa-headset"></i> Contact Staff</a></li>
+  
       <li><a href="/Mega_City/Driver/Login.html" class="submenu-toggle"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
 
       

@@ -1,5 +1,5 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="Driver.BookingView" %>
+<%@ page import="Driver.Class.BookingView" %>
 <html>
 <head>
     <title>Booking View</title>

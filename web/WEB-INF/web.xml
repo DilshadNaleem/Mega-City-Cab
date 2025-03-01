@@ -125,10 +125,6 @@
         <servlet-class>Driver.CompleteTripServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DashboardCountServlet</servlet-name>
-        <servlet-class>Driver.DashboardCountServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>BookingServletView</servlet-name>
         <servlet-class>Driver.BookingServletView</servlet-class>
     </servlet>
@@ -215,6 +211,10 @@
     <servlet>
         <servlet-name>ProcessPaymentServlet</servlet-name>
         <servlet-class>Customer.ProcessPaymentServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageRequestDriverServlet</servlet-name>
+        <servlet-class>Admin.Servlets.ManageRequestDriverServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
@@ -325,10 +325,6 @@
         <url-pattern>/CompleteTripServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DashboardCountServlet</servlet-name>
-        <url-pattern>/DashboardCountServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>BookingServletView</servlet-name>
         <url-pattern>/BookingServletView</url-pattern>
     </servlet-mapping>
@@ -411,6 +407,10 @@
     <servlet-mapping>
         <servlet-name>ProcessPaymentServlet</servlet-name>
         <url-pattern>/ProcessPaymentServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageRequestDriverServlet</servlet-name>
+        <url-pattern>/ManageRequestDriverServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>30</session-timeout>
