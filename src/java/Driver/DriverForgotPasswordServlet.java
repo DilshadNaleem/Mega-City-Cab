@@ -22,6 +22,7 @@ import java.sql.ResultSet;
 import java.util.Properties;
 import DatabaseConnection.*;
 
+
 public class DriverForgotPasswordServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
