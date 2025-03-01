@@ -8,6 +8,7 @@ import java.io.*;
 import java.sql.*;
 import DatabaseConnection.*;
 
+
 public class VehicleRetrieveServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
