@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpSession;
 import java.sql.*;
 import DatabaseConnection.*;
 
-
 public class ManageVehicleTypesServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
