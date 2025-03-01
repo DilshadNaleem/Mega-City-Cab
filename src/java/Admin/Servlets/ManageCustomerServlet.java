@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.Map;
 import DatabaseConnection.*;
 
-
 public class ManageCustomerServlet extends HttpServlet {
 
    

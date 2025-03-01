@@ -12,7 +12,6 @@ import java.sql.*;
 import java.sql.PreparedStatement;
 import DatabaseConnection.*;
 
-
 public class DeleteCustomerServlet extends HttpServlet {
 
   
