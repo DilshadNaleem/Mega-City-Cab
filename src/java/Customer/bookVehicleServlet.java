@@ -13,6 +13,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import DatabaseConnection.*;
 
+
 public class bookVehicleServlet extends HttpServlet {
 
   @Override
