@@ -1,7 +1,6 @@
 
 package Customer.CService;
 
-
 public class PaymentClass {
     private String orderId;
     private String paymentId;
