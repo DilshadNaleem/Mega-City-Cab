@@ -15,10 +15,7 @@ import java.sql.*;
 import java.sql.PreparedStatement;
 import DatabaseConnection.*;
 
-/**
- *
- * @author HP
- */
+
 public class CustomerEditProfileServlet extends HttpServlet {
 
   
