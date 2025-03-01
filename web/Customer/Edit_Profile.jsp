@@ -98,7 +98,7 @@
                 <%= successMessage %>
             </div>
         <% } %>
-
+ 
         <% 
             Map<String, EditProfile> profileDetails = (HashMap<String, EditProfile>) request.getAttribute("profileDetails");
             EditProfile profile = null;

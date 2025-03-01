@@ -108,7 +108,7 @@
                                     "bg-danger" %>">
                                 <%= history.getStatus() %>
                             </span>
-                        </td>
+                        </td> 
                         <td>
                             <% if (history.getStatus().equalsIgnoreCase("Booked")) { %>
                                 <form action="CancelBookingServlet" method="POST">

@@ -82,7 +82,7 @@
             }
         </style>
     </head>
-    
+     
     <body>
         <h2>Manage Customers</h2>
         

@@ -123,7 +123,7 @@
                     </tr>
                     <% 
                     } 
-                    %>
+                    %> 
                 </tbody>
             </table>
                 <button class="back-btn" onclick="window.history.back();">Back</button>

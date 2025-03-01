@@ -65,7 +65,7 @@
                     <th>Unique ID</th>
                     <th>Vehicle Name</th>
                     <th>Booking Date</th>
-                    <th>Returned Date</th>
+                    <th>Returned Date</th> 
                     <th>Customer Name</th>
                     <th>Fare</th>
                     <th>Fine</th>

@@ -14,7 +14,7 @@
             border: 1px solid #ddd;
             text-align: left;
         }
-        th {
+        th { 
             background-color: #f2f2f2;
         }
     </style>

@@ -56,7 +56,7 @@
         }
         .back-btn:hover {
             background-color: #aaa;
-        }
+        } 
     </style>
 </head>
 <body>

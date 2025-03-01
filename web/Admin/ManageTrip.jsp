@@ -108,7 +108,7 @@
                 <th>Rent Per Day</th>
                 <th>Fine</th>
                 <th>Status</th>
-            </tr>
+            </tr> 
         </thead>
 
         <tbody>

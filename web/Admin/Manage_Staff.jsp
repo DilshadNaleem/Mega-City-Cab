@@ -112,7 +112,7 @@
                 <th>Vehicle Name</th>
                 <th>Total Earnings</th>
                 <th>Actions</th>
-            </tr>
+            </tr> 
         </thead>
         <tbody>
             <%

@@ -92,7 +92,7 @@
             %>
                 <tr>
                     <td colspan="12">No vehicles found.</td>
-                </tr>
+                </tr> 
             <% 
                 } else {
                     for (Map.Entry<String, VehicleConfirmClass> entry : vehicleClassconfirm.entrySet()) {

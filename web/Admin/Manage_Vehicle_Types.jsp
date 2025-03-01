@@ -71,7 +71,7 @@
                 <th>Image</th>
                 <th>Actions</th>
             </tr>
-        </thead>
+        </thead> 
         <tbody>
             <%
                 ArrayList<ManageVehicleTypeClass> vehicleList = 

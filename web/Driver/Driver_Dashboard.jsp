@@ -176,7 +176,7 @@
         </ul>
       </div>
     </div>
-  </header>
+  </header> 
 
   <div class="sidebar">
     <ul>
