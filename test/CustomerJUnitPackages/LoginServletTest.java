@@ -1,5 +1,8 @@
 package CustomerJUnitPackages;
 
+import MockHttp.MockHttpServletResponse;
+import MockHttp.MockHttpSession;
+import MockHttp.MockHttpServletRequest;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import java.io.IOException;
@@ -78,7 +81,7 @@ public class LoginServletTest {
         // Simulate failed customer validation
         boolean isValidCustomer = customerService.validateCustomer(email, hashedPassword);
         if (!isValidCustomer) {
-            response.sendRedirect("/Admin/Admin_Login.html");
+            response.sendRedirect("/Customer/Signin.html");
             writer.println("<script type='text/javascript'>");
             writer.println("alert('Invalid email or password, or account not verified.');");
         }

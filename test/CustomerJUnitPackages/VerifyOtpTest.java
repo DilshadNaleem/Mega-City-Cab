@@ -1,5 +1,8 @@
 package CustomerJUnitPackages;
 
+import MockHttp.MockHttpServletResponse;
+import MockHttp.MockHttpSession;
+import MockHttp.MockHttpServletRequest;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import java.io.IOException;

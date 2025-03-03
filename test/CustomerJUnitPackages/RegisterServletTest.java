@@ -1,5 +1,8 @@
 package CustomerJUnitPackages;
 
+import MockHttp.MockHttpServletResponse;
+import MockHttp.MockHttpSession;
+import MockHttp.MockHttpServletRequest;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import java.io.IOException;
@@ -33,9 +36,8 @@ public class RegisterServletTest {
         writer = new PrintWriter(System.out);
         emailservice = new EmailService();
         dbUtility = new DatabaseUtility();
-        idGenerator = new UniqueIdGenerator();
         otpGenerator = new OtpGenerator();
-        hasher = new PasswordHasher();
+        
     }
     
     @Test
