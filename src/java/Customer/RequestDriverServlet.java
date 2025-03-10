@@ -47,10 +47,13 @@ public class RequestDriverServlet extends HttpServlet {
 
         // Handle the response based on the result
         if (isAdded) {
-            out.println("<html><body>");
-            out.println("<h3>Driver request added successfully!</h3>");
-            out.println("<a href='/Mega_City/Customer/RequestDriver.jsp'>Go Back</a>");
-            out.println("</body></html>");
+            
+            out.println("<script>");
+            out.println("alert('Driver request added successfully!');");    
+            out.println("window.location.href = '/Mega_City/Customer/RequestDriver.jsp';");
+            out.println("</script>");
+
+            
         } else {
             out.println("<html><body>");
             out.println("<h3>Error while adding the driver request. Please try again later.</h3>");
