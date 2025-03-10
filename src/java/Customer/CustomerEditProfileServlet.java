@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.sql.*;
 import java.sql.PreparedStatement;
-import DatabaseConnection.*;
+import DatabaseConnection.DatabaseConnection;
 
 
 public class CustomerEditProfileServlet extends HttpServlet {
@@ -29,7 +29,7 @@ public class CustomerEditProfileServlet extends HttpServlet {
         
         if(sessionEmail == null)
         {
-            response.sendRedirect("Mega_City/Customer/Signin.html");
+            response.sendRedirect("Customer/Signin.html");
             return;
         }
         
