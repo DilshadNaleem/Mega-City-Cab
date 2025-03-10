@@ -1,5 +1,6 @@
 package Driver;
 
+import Admin.EmailService;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,14 +14,27 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
 import java.util.Properties;
-import DatabaseConnection.*;
+import DatabaseConnection.DatabaseConnection;
+import jakarta.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class CompleteTripServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+        HttpSession session = request.getSession();
+        String sessionEmail = (String) session.getAttribute("driveremail");
+        
+        if(sessionEmail == null)
+        {
+            response.sendRedirect("/Mega_City/Driver/Login.html");
+            return;
+        }
         String bookingId = request.getParameter("bookingId");
 
         if (bookingId != null) {
@@ -58,14 +72,14 @@ public class CompleteTripServlet extends HttpServlet {
                     sendEmail(customerEmail, fine);
                 }
 
-                response.sendRedirect("/Mega_City/Driver/Bookings.jsp");
+               response.getWriter().println("<script>alert('Trip Completed. The user has been notified via email.'); window.location='/Mega_City/Driver/Bookings.jsp';</script>");
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private void sendEmail(String customerEmail, double fine) {
+    public void sendEmail(String customerEmail, double fine) {
         String host = "smtp.gmail.com";  // SMTP host for Gmail
         final String user = "hypermarket403@gmail.com"; // Sender's email
         final String password = "prny fbme inmd nkzb"; // App-specific password for Gmail
@@ -87,9 +101,20 @@ public class CompleteTripServlet extends HttpServlet {
         try {
             // Create a default MimeMessage object
             MimeMessage message = new MimeMessage(session);
-
-            // Set From: header field
-            message.setFrom(new InternetAddress(user));
+            try
+            {
+                message.setFrom(new InternetAddress(user,"Mega City"));
+            }
+            catch(AddressException e)
+            {
+                throw new MessagingException("Invalid sender address or display name " , e);
+            }
+            
+            catch (UnsupportedEncodingException ex)
+                    {
+                       Logger.getLogger(CompleteTripServlet.class.getName()).log(Level.SEVERE, "Unsupported encoding exception", ex);
+            throw new MessagingException("Error setting the sender's email address", ex);  
+                    }
 
             // Set To: header field
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(customerEmail));
