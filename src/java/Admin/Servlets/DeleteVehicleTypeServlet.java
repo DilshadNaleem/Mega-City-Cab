@@ -1,6 +1,7 @@
 package Admin.Servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -8,18 +9,19 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import DatabaseConnection.*;
-
+import DatabaseConnection.DatabaseConnection;
 
 public class DeleteVehicleTypeServlet extends HttpServlet {
   
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         String vehicleId = request.getParameter("vehicleId"); // Get vehicleId from form
+        String message;
 
         if (vehicleId == null || vehicleId.isEmpty()) {
-            response.sendRedirect("error.jsp?message=Invalid ID");
+            message = "Invalid Vehicle ID!";
+            sendAlert(response, message);
             return;
         }
 
@@ -33,17 +35,29 @@ public class DeleteVehicleTypeServlet extends HttpServlet {
             int rowsDeleted = stmt.executeUpdate();  // Execute delete query
             
             if (rowsDeleted > 0) {
-                response.sendRedirect("manageVehicles.jsp?success=Vehicle deleted successfully");
+                message = "Vehicle deleted Successfully!";
             } else {
-                response.sendRedirect("manageVehicles.jsp?error=Vehicle not found");
+                message = "Vehicle not found!";
             }
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-            response.sendRedirect("error.jsp?message=SQL Error: " + ex.getMessage());
+            message = "SQL Error: " + ex.getMessage();
         } catch (Exception ex) {
             ex.printStackTrace();
-            response.sendRedirect("error.jsp?message=Error: " + ex.getMessage());
+            message = "Unexpected Error: " + ex.getMessage();
         }
+
+        // Send alert message and reload page
+        sendAlert(response, message);
+    }
+
+    private void sendAlert(HttpServletResponse response, String message) throws IOException {
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        out.println("<script type='text/javascript'>");
+        out.println("alert('" + message + "');");
+        out.println("window.location.href=document.referrer;");
+        out.println("</script>");
     }
 }
