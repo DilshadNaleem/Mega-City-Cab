@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import DatabaseConnection.*;
+import DatabaseConnection.DatabaseConnection;
 
 
 public class EditProfileServlet extends HttpServlet {
@@ -25,7 +25,7 @@ public class EditProfileServlet extends HttpServlet {
         String sessionEmail = (String) session.getAttribute("driveremail");
 
         if (sessionEmail == null) {
-            response.sendRedirect("Driver/Login.html");
+            response.sendRedirect("/Mega_City/Driver/Login.html");
             return;
         }
 
